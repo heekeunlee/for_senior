@@ -1,0 +1,12 @@
+# macOS
+.DS_Store
+
+# R
+.Rhistory
+.RData
+.Rproj.user
+
+# 대화 기록 — 저장소가 public이므로 기본 제외.
+# 공개해도 되면 이 두 줄을 지우고 커밋하십시오.
+CONVERSATION.md
+CONVERSATION.txt
