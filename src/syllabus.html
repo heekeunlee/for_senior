@@ -1,0 +1,924 @@
+<title>두 번째 명함</title>
+<style>
+:root{
+  --paper:#F5F6F8; --surface:#FFFFFF; --surface-2:#EDEFF3;
+  --ink:#1B2733; --ink-soft:#465565; --ink-mute:#79879A;
+  --line:#D8DDE5; --line-soft:#E7EAEF;
+  --indigo:#2B4C6F; --indigo-soft:#5C82AB; --indigo-wash:#E8EEF5;
+  --ochre:#B5742A; --ochre-wash:#F7EDDF;
+  --celadon:#3E7A6B; --celadon-wash:#E6F0ED;
+  --crimson:#A33B3B;
+  --shadow:0 1px 2px rgba(27,39,51,.05), 0 8px 24px -12px rgba(27,39,51,.18);
+  --font-display:"Nanum Myeongjo","AppleMyungjo","Apple Myungjo","Noto Serif KR",Batang,Georgia,serif;
+  --font-body:"Pretendard","Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",-apple-system,BlinkMacSystemFont,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#11161B; --surface:#181F26; --surface-2:#1F272F;
+    --ink:#E6EAEF; --ink-soft:#A9B5C2; --ink-mute:#7C8898;
+    --line:#2C363F; --line-soft:#232C34;
+    --indigo:#87ADD3; --indigo-soft:#5C82AB; --indigo-wash:#1B2833;
+    --ochre:#DDA05A; --ochre-wash:#2C2318;
+    --celadon:#77BCA9; --celadon-wash:#182620;
+    --crimson:#D97C7C;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#11161B; --surface:#181F26; --surface-2:#1F272F;
+  --ink:#E6EAEF; --ink-soft:#A9B5C2; --ink-mute:#7C8898;
+  --line:#2C363F; --line-soft:#232C34;
+  --indigo:#87ADD3; --indigo-soft:#5C82AB; --indigo-wash:#1B2833;
+  --ochre:#DDA05A; --ochre-wash:#2C2318;
+  --celadon:#77BCA9; --celadon-wash:#182620;
+  --crimson:#D97C7C;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--font-body); font-size:16px; line-height:1.75;
+  -webkit-font-smoothing:antialiased; word-break:keep-all; overflow-wrap:break-word;
+}
+.wrap{max-width:1160px; margin:0 auto; padding:0 24px}
+.prose{max-width:68ch}
+h1,h2,h3,h4{font-family:var(--font-display); text-wrap:balance; margin:0; line-height:1.3; font-weight:700}
+p{margin:0}
+a{color:var(--indigo)}
+.eyebrow{
+  font-size:.75rem; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--ochre); font-weight:700; font-family:var(--font-body);
+}
+
+/* ---------- hero ---------- */
+.hero{
+  border-bottom:1px solid var(--line);
+  background:
+    linear-gradient(180deg, var(--indigo-wash) 0%, transparent 70%),
+    var(--paper);
+}
+.hero-inner{display:flex; flex-direction:column; gap:32px; padding:64px 0 48px}
+.hero h1{font-size:clamp(2.4rem,6vw,4rem); letter-spacing:-.01em}
+.hero .sub{font-size:clamp(1.05rem,2.2vw,1.3rem); color:var(--ink-soft); max-width:56ch; margin-top:14px}
+.hero .kicker{font-size:.95rem; color:var(--ink-mute); margin-top:20px; max-width:60ch}
+.stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:2px; overflow:hidden}
+.stat{background:var(--surface); padding:18px 20px}
+.stat b{display:block; font-family:var(--font-display); font-size:1.9rem; line-height:1.1; color:var(--indigo); font-variant-numeric:tabular-nums}
+.stat span{display:block; font-size:.8rem; color:var(--ink-mute); margin-top:6px; letter-spacing:.02em}
+
+/* ---------- layout ---------- */
+.main{display:grid; grid-template-columns:1fr; gap:0; padding:56px 0 96px}
+@media(min-width:1000px){
+  .main{grid-template-columns:186px 1fr; gap:56px}
+  .toc{display:block}
+}
+.toc{display:none; position:sticky; top:32px; align-self:start; font-size:.85rem; border-left:1px solid var(--line); padding-left:16px}
+.toc ol{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px}
+.toc a{color:var(--ink-mute); text-decoration:none; display:block}
+.toc a:hover,.toc a:focus{color:var(--indigo)}
+.toc .num{font-variant-numeric:tabular-nums; color:var(--ochre); margin-right:7px; font-size:.78rem}
+
+section{scroll-margin-top:24px}
+section + section{margin-top:72px}
+.sec-head{border-top:2px solid var(--ink); padding-top:14px; margin-bottom:28px; display:flex; gap:16px; align-items:baseline}
+.sec-head .n{font-family:var(--font-display); font-size:1.1rem; color:var(--ochre); font-variant-numeric:tabular-nums; flex:none}
+.sec-head h2{font-size:clamp(1.5rem,3vw,2.05rem)}
+.sec-head .note{margin-top:8px; font-size:.92rem; color:var(--ink-mute); font-family:var(--font-body); font-weight:400; line-height:1.6}
+
+.stack{display:flex; flex-direction:column; gap:22px}
+.stack-lg{display:flex; flex-direction:column; gap:36px}
+
+h3{font-size:1.16rem; margin-bottom:2px}
+h4{font-size:.98rem; font-family:var(--font-body); font-weight:700}
+.lead{font-size:1.06rem; color:var(--ink-soft)}
+ul.clean{margin:0; padding-left:1.15em; display:flex; flex-direction:column; gap:7px}
+ul.clean li::marker{color:var(--ochre)}
+
+/* ---------- cards ---------- */
+.card{background:var(--surface); border:1px solid var(--line); border-radius:3px; padding:22px 24px; box-shadow:var(--shadow)}
+.grid2{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px}
+.grid3{display:grid; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); gap:16px}
+.card h3{margin-bottom:8px}
+.card p{color:var(--ink-soft); font-size:.94rem}
+
+.principle{display:grid; grid-template-columns:44px 1fr; gap:18px; align-items:start}
+.principle .mark{
+  width:44px; height:44px; border-radius:50%; display:grid; place-items:center;
+  background:var(--indigo-wash); color:var(--indigo); border:1px solid var(--indigo-soft);
+  font-family:var(--font-display); font-size:1.05rem; font-weight:700; flex:none
+}
+
+/* ---------- callouts ---------- */
+.callout{border-left:3px solid var(--ochre); background:var(--ochre-wash); padding:16px 20px; border-radius:0 3px 3px 0}
+.callout.ok{border-color:var(--celadon); background:var(--celadon-wash)}
+.callout.warn{border-color:var(--crimson); background:var(--surface-2)}
+.callout .tag{font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; font-weight:700; color:var(--ochre); display:block; margin-bottom:5px}
+.callout.ok .tag{color:var(--celadon)}
+.callout.warn .tag{color:var(--crimson)}
+.callout p{font-size:.94rem; color:var(--ink-soft)}
+
+/* ---------- tables ---------- */
+.tablewrap{overflow-x:auto; border:1px solid var(--line); border-radius:3px; background:var(--surface)}
+table{border-collapse:collapse; width:100%; min-width:620px; font-size:.9rem}
+th,td{padding:11px 14px; text-align:left; border-bottom:1px solid var(--line-soft); vertical-align:top}
+thead th{background:var(--surface-2); font-weight:700; font-size:.8rem; letter-spacing:.03em; color:var(--ink-soft); border-bottom:1px solid var(--line); white-space:nowrap}
+tbody tr:last-child td{border-bottom:none}
+td.wk{font-variant-numeric:tabular-nums; font-weight:700; color:var(--indigo); white-space:nowrap}
+.phase-row td{background:var(--indigo-wash); font-family:var(--font-display); font-weight:700; color:var(--indigo); font-size:.92rem}
+.pill{display:inline-block; font-size:.72rem; padding:2px 9px; border-radius:99px; border:1px solid currentColor; white-space:nowrap; font-weight:700}
+.pill.ok{color:var(--celadon)} .pill.new{color:var(--ochre)} .pill.same{color:var(--indigo-soft)}
+
+/* ---------- figures ---------- */
+figure{margin:0; display:flex; flex-direction:column; gap:10px}
+.figbox{background:var(--surface); border:1px solid var(--line); border-radius:3px; padding:22px 18px; overflow-x:auto; box-shadow:var(--shadow)}
+.figbox svg{display:block; min-width:600px; width:100%; height:auto}
+figcaption{font-size:.83rem; color:var(--ink-mute); line-height:1.6}
+figcaption b{color:var(--ink-soft)}
+.svg-label{font-family:var(--font-body); font-size:11px; fill:var(--ink-mute)}
+.svg-label-b{font-family:var(--font-body); font-size:12px; font-weight:700; fill:var(--ink)}
+.svg-title{font-family:var(--font-display); font-size:14px; font-weight:700; fill:var(--ink)}
+.svg-num{font-family:var(--font-body); font-size:10px; fill:var(--ink-mute)}
+
+footer{border-top:1px solid var(--line); padding:36px 0 64px; font-size:.85rem; color:var(--ink-mute)}
+footer a{color:var(--ink-soft)}
+.srclist{display:flex; flex-direction:column; gap:6px; margin:14px 0 0; padding:0; list-style:none}
+:focus-visible{outline:2px solid var(--ochre); outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+</style>
+
+<header class="hero">
+  <div class="wrap hero-inner">
+    <div>
+      <span class="eyebrow">은퇴·은퇴예정 사무직 대상 · AI 활용 실무 과정</span>
+      <h1>두 번째 명함</h1>
+      <p class="sub">퇴직하면 명함이 없어집니다. 30년의 업무 경험은 그대로인데 그것을 담을 그릇이 사라진 것뿐입니다. 이 과정은 그 그릇을 AI로 다시 만듭니다.</p>
+      <p class="kicker">12주 만에 수강생 한 사람이 <b>자기 이름으로 된 앱 하나, 대시보드 하나, 공유 가능한 링크 하나</b>를 갖고 나가는 것을 목표로 설계된 강의계획서입니다. 국내 공공·민간 시니어 AI 교육 운영 사례를 조사해 대조 검증했습니다.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>12</b><span>주 (주 1회)</span></div>
+      <div class="stat"><b>24</b><span>시간 (회당 2h)</span></div>
+      <div class="stat"><b>20</b><span>명 정원</span></div>
+      <div class="stat"><b>4</b><span>선택 트랙</span></div>
+      <div class="stat"><b>9</b><span>개 결과물</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap main">
+  <nav class="toc" aria-label="목차">
+    <ol>
+      <li><a href="#s1"><span class="num">01</span>과정 개요</a></li>
+      <li><a href="#s2"><span class="num">02</span>국내 사례 벤치마크</a></li>
+      <li><a href="#s3"><span class="num">03</span>설계 원칙</a></li>
+      <li><a href="#s4"><span class="num">04</span>12주 커리큘럼</a></li>
+      <li><a href="#s5"><span class="num">05</span>트랙별 프로젝트</a></li>
+      <li><a href="#s6"><span class="num">06</span>1회차 운영 표준</a></li>
+      <li><a href="#s7"><span class="num">07</span>도구와 Claude Skills</a></li>
+      <li><a href="#s8"><span class="num">08</span>평가·수료·리스크</a></li>
+      <li><a href="#src"><span class="num">—</span>출처</a></li>
+    </ol>
+  </nav>
+
+  <div>
+
+  <!-- ================= 01 ================= -->
+  <section id="s1">
+    <div class="sec-head"><span class="n">01</span>
+      <div><h2>과정 개요</h2>
+      <p class="note">전문 개발자 양성 과정이 아닙니다. "만들 줄 아는 사람"이 아니라 "만들어 본 사람"을 배출하는 것이 목표입니다.</p></div>
+    </div>
+    <div class="stack-lg">
+      <div class="grid3">
+        <div class="card">
+          <h3>대상</h3>
+          <p>은퇴를 앞두었거나 은퇴한 사무직 출신. 엑셀·워드·이메일·파일 관리에 익숙하고, 생성형 AI 사용 경험은 거의 없는 분. <b>디지털 기초 교육이 필요한 층이 아닙니다.</b></p>
+        </div>
+        <div class="card">
+          <h3>도달 목표</h3>
+          <p>말로 지시해 웹앱을 만들고, 자기 데이터로 대시보드를 만들고, 결과물 링크를 가족·지인에게 전달할 수 있다. 코드를 직접 작성하는 능력은 목표가 아닙니다.</p>
+        </div>
+        <div class="card">
+          <h3>운영 형태</h3>
+          <p>주 1회 2시간 대면, 12주. 정원 20명, 조교 2명(수강생 10명당 1명). 전 과정 브라우저 기반 — 설치·터미널·개발환경 없음.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <span class="tag">과정 명명에 대하여</span>
+        <p>"시니어 AI 기초반", "어르신 디지털 교실" 같은 명칭은 이 대상층에서 등록률을 떨어뜨립니다. 사무직 경력자는 초심자 취급을 모욕으로 받아들입니다. <b>과정명·홍보문구·강사 화법 전체를 "경력을 자산으로 전환한다"는 프레임으로 통일</b>하십시오. 이것은 마케팅이 아니라 이탈 방지 설계입니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 02 ================= -->
+  <section id="s2">
+    <div class="sec-head"><span class="n">02</span>
+      <div><h2>국내 운영 사례 벤치마크</h2>
+      <p class="note">정부·지자체·공공재단·민간에서 실제로 운영 중인 중장년·시니어 AI 교육과정을 조사해, 본 계획의 방향이 국내 현행 실무와 어긋나지 않는지 대조했습니다. 조사 시점 2026년 8월.</p></div>
+    </div>
+
+    <div class="stack-lg">
+      <div class="tablewrap">
+        <table>
+          
+          <thead><tr><th>운영 주체</th><th>구성</th><th>분량</th><th>규모·비용</th><th>주목할 점</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><b>서울시50플러스재단</b><br><span style="color:var(--ink-mute);font-size:.82rem">5개 권역 캠퍼스</span></td>
+              <td>기초 · 중급 · 고급 <b>3단계</b></td>
+              <td>주 1회, 4~6주<br>12~18시간</td>
+              <td>정원 26명<br>24,000원<br>연 약 1,500명</td>
+              <td>이론이 아닌 <b>실습 중심</b> 명시. 중장년 대상임을 고려해 <b>시니어 강사 5명을 별도 선발</b>. 최종 회차를 <b>성과 발표회</b>로 고정.</td>
+            </tr>
+            <tr>
+              <td><b>서대문50플러스센터</b></td>
+              <td>3개 분야 62개 프로그램</td>
+              <td>학기제</td>
+              <td>학기당 1,247명</td>
+              <td><b>"AI 바이브 코딩 입문 — 말로 앱을 만드는 과정"</b>이 이미 정규 편성. AI코딩 강사 양성과정 별도 운영. 중장년 강사가 직접 강의.</td>
+            </tr>
+            <tr>
+              <td><b>대전중장년지원센터</b><br><span style="color:var(--ink-mute);font-size:.82rem">대전시사회서비스원</span></td>
+              <td>학기당 7개 과정</td>
+              <td>학기제</td>
+              <td>공공 운영</td>
+              <td><b>전 과정에 ChatGPT 활용을 필수 포함</b>. AI를 별도 과목이 아니라 모든 과목의 공통 도구로 취급. 창업·창직 연계.</td>
+            </tr>
+            <tr>
+              <td><b>용인시</b><br><span style="color:var(--ink-mute);font-size:.82rem">경기도 AI디지털배움터 연계</span></td>
+              <td>기초체험 · 입문 · 심화 <b>3단계</b></td>
+              <td>약 4개월 상시</td>
+              <td>무료(지자체)</td>
+              <td>지자체 정보화교육장 인프라 활용. 요일반 편성으로 난이도 자율 선택.</td>
+            </tr>
+            <tr>
+              <td><b>KMA 한국능률협회</b></td>
+              <td>시니어 공개교육 시리즈</td>
+              <td>단기 공개과정</td>
+              <td>민간 유료</td>
+              <td>1호 과정이 <b>"ChatGPT를 활용한 중장년 인생계획 세우기"</b>. AI를 기술이 아니라 <b>생애설계 도구</b>로 포지셔닝.</td>
+            </tr>
+            <tr>
+              <td><b>과기정통부 AI디지털배움터</b></td>
+              <td>전국 17개 지역</td>
+              <td>상시</td>
+              <td>무료, 1,000곳 이상</td>
+              <td><b>노노(老老)교육</b> — 시니어가 시니어를 가르치는 보조강사 제도를 공식 운영.</td>
+            </tr>
+            <tr>
+              <td><b>민간 국비지원 학원</b><br><span style="color:var(--ink-mute);font-size:.82rem">SBS아카데미 등</span></td>
+              <td>생활활용 / 베이직 / 마스터</td>
+              <td>4주 ~ 12주<br>최대 48시간</td>
+              <td>국민내일배움카드<br>최대 100% 지원</td>
+              <td>도구를 다중 스택으로 학습(ChatGPT·Claude·Gemini·CLOVA X). 수익화까지 목표로 명시.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure>
+        <div class="figbox">
+          <svg viewBox="0 0 720 250" role="img" aria-label="국내 중장년 AI 교육과정 총 교육시간 비교 막대그래프. 서울시50플러스 표준 12시간, 최대 18시간, 본 과정 24시간, 민간 국비 심화 48시간.">
+            <text class="svg-title" x="0" y="14">총 교육시간 비교 — 본 과정의 위치</text>
+            <text class="svg-label" x="0" y="32">국내 공공과정보다 길고, 민간 국비 심화과정보다 짧은 구간</text>
+
+            <g transform="translate(0,50)">
+              <!-- gridlines -->
+              <g stroke="var(--line)" stroke-width="1">
+                <line x1="190" y1="0" x2="190" y2="160"/>
+                <line x1="300" y1="0" x2="300" y2="160" stroke-dasharray="2 3"/>
+                <line x1="410" y1="0" x2="410" y2="160" stroke-dasharray="2 3"/>
+                <line x1="520" y1="0" x2="520" y2="160" stroke-dasharray="2 3"/>
+                <line x1="630" y1="0" x2="630" y2="160" stroke-dasharray="2 3"/>
+              </g>
+              <g class="svg-num" text-anchor="middle">
+                <text x="190" y="176">0h</text><text x="300" y="176">12h</text>
+                <text x="410" y="176">24h</text><text x="520" y="176">36h</text><text x="630" y="176">48h</text>
+              </g>
+
+              <!-- bars: scale 12h = 110px -->
+              <g>
+                <text class="svg-label" x="182" y="17" text-anchor="end">서울시50플러스 표준</text>
+                <rect x="190" y="4" width="110" height="18" fill="var(--indigo-soft)" opacity=".55" rx="1"/>
+                <text class="svg-num" x="308" y="17">12시간 · 4주</text>
+              </g>
+              <g>
+                <text class="svg-label" x="182" y="53" text-anchor="end">서울시50플러스 최대</text>
+                <rect x="190" y="40" width="165" height="18" fill="var(--indigo-soft)" opacity=".55" rx="1"/>
+                <text class="svg-num" x="363" y="53">18시간 · 6주</text>
+              </g>
+              <g>
+                <text class="svg-label-b" x="182" y="89" text-anchor="end" fill="var(--ochre)">본 과정 (제안)</text>
+                <rect x="190" y="76" width="220" height="18" fill="var(--ochre)" rx="1"/>
+                <text class="svg-num" x="418" y="89" fill="var(--ochre)">24시간 · 12주</text>
+              </g>
+              <g>
+                <text class="svg-label" x="182" y="125" text-anchor="end">민간 국비 심화</text>
+                <rect x="190" y="112" width="440" height="18" fill="var(--indigo-soft)" opacity=".3" rx="1"/>
+                <text class="svg-num" x="638" y="125">48시간</text>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <figcaption><b>해석.</b> 본 과정은 총 시간(24h)은 공공과정의 1.3~2배지만 <b>회당 2시간으로 쪼개 12주에 분산</b>했습니다. 국내 공공과정이 3시간×4회에 몰아넣는 것과 반대 방향입니다. 이 대상층은 한 번에 오래 앉아 있는 것보다 <b>일주일 간격으로 자기 데이터를 챙겨 오는 리듬</b>에 더 잘 반응하기 때문이며, 대신 12주라는 긴 호흡이 이탈 위험을 키우므로 03장의 이탈 방지 장치가 필수 전제가 됩니다.</figcaption>
+      </figure>
+
+      <h3>대조 결과 — 본 계획의 방향 검증</h3>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>본 계획의 선택</th><th>판정</th><th>근거</th></tr></thead>
+          <tbody>
+            <tr><td>실습 중심, 이론 최소화</td><td><span class="pill ok">국내 표준과 일치</span></td><td>조사한 모든 기관이 "이론 중심이 아닌 실습 중심"을 명시. 예외 없음.</td></tr>
+            <tr><td>말로 앱 만들기(바이브 코딩)</td><td><span class="pill ok">이미 정규 편성됨</span></td><td>서대문50플러스센터가 "말로 앱을 만드는 AI 바이브 코딩 입문"을 정규 과정으로 운영 중. 실험적 시도가 아님.</td></tr>
+            <tr><td>최종 회차 = 발표회</td><td><span class="pill ok">국내 표준과 일치</span></td><td>서울시50플러스 프로젝트 과정의 4회차가 "성과 발표회 · 우수 프로젝트 시상 및 수료"로 고정 편성.</td></tr>
+            <tr><td>1주차에 엑셀+AI 배치</td><td><span class="pill ok">타당</span></td><td>서울시50플러스가 "AI로 엑셀 표 쉽게 만들고 정리하기"를 <b>중급</b>에 배치. 사무직 경력자 대상이라면 이를 1주차로 앞당기는 것이 합리적.</td></tr>
+            <tr><td>데이터 분석·대시보드를 후반부에</td><td><span class="pill ok">국내 난이도 인식과 일치</span></td><td>서울시50플러스가 "AI로 데이터 읽고 분석하기"를 <b>고급</b>으로 분류. 본 계획의 7~9주 배치와 부합.</td></tr>
+            <tr><td>조교 2명(10:1) 운영</td><td><span class="pill new">보완 권고</span></td><td>서울시50플러스는 <b>시니어 강사를 별도 선발</b>하고, 과기정통부는 <b>노노교육 보조강사 제도</b>를 운영. 조교를 20~30대가 아니라 <b>동년배 중에서 뽑는 것</b>을 강력히 권고합니다.</td></tr>
+            <tr><td>4개 트랙 분기</td><td><span class="pill new">국내 미확인 · 본 과정 고유</span></td><td>국내 사례는 과정 자체를 분리 개설하는 방식(자산관리반·창업반 별도). 한 과정 안에서 후반부에 분기하는 설계는 확인되지 않음. <b>차별점이자 검증되지 않은 리스크.</b></td></tr>
+            <tr><td>개인 실데이터 기반 대시보드</td><td><span class="pill new">국내 미확인 · 본 과정 고유</span></td><td>국내 과정은 대체로 예제 데이터를 사용. 개인정보 처리 부담 때문으로 보이며, 08장의 데이터 취급 규칙이 반드시 선행되어야 합니다.</td></tr>
+            <tr><td>총 24시간 / 12주</td><td><span class="pill same">국내 최장급</span></td><td>공공 표준(12~18시간)을 상회. 예산·강사비·이탈률 모두에서 부담이 커지므로 8주 축약안(06장)을 함께 준비하십시오.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout ok">
+        <span class="tag">종합 판정</span>
+        <p><b>방향은 맞습니다.</b> 본 계획의 핵심 요소 — 실습 중심, 말로 앱 만들기, 발표회로 마무리, 후반부 데이터 분석 — 는 모두 국내 공공기관에서 이미 검증되어 운영 중인 구성입니다. 국내 사례보다 앞서 있는 지점은 <b>개인 실데이터 사용</b>과 <b>트랙 분기</b> 두 가지이며, 이 둘이 본 과정의 차별점인 동시에 유일한 미검증 구간입니다. 반대로 국내 사례에서 배워 반드시 반영해야 할 것은 <b>동년배 조교 제도</b>입니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 03 ================= -->
+  <section id="s3">
+    <div class="sec-head"><span class="n">03</span>
+      <div><h2>설계 원칙</h2>
+      <p class="note">12주는 국내 공공과정의 두 배 호흡입니다. 그만큼 이탈 관리가 커리큘럼 내용보다 중요해집니다. 아래 다섯 가지는 취향이 아니라 이탈 방지 장치입니다.</p></div>
+    </div>
+
+    <div class="stack-lg">
+      <figure>
+        <div class="figbox">
+          <svg viewBox="0 0 720 300" role="img" aria-label="주차별 이탈 위험도 곡선. 1주차 계정 가입 장벽, 5주차 첫 에러 경험, 7주차 내 데이터 준비 실패, 10주차 트랙 선택 부담에서 위험이 높아짐.">
+            <text class="svg-title" x="0" y="14">주차별 이탈 위험도와 개입 지점</text>
+            <text class="svg-label" x="0" y="32">위험이 솟는 네 지점은 모두 예측 가능하며, 모두 커리큘럼으로 방어할 수 있습니다</text>
+
+            <!-- y grid -->
+            <g stroke="var(--line)" stroke-width="1" stroke-dasharray="2 4">
+              <line x1="60" y1="40" x2="690" y2="40"/>
+              <line x1="60" y1="115" x2="690" y2="115"/>
+            </g>
+            <line x1="60" y1="190" x2="690" y2="190" stroke="var(--line)" stroke-width="1.5"/>
+            <text class="svg-num" x="52" y="44" text-anchor="end">높음</text>
+            <text class="svg-num" x="52" y="194" text-anchor="end">낮음</text>
+
+            <!-- area -->
+            <path d="M60,78 L117,130 L175,145 L232,138 L289,63 L346,138 L404,85 L461,123 L518,145 L576,115 L633,153 L690,175 L690,190 L60,190 Z"
+                  fill="var(--crimson)" opacity=".13"/>
+            <!-- line -->
+            <path d="M60,78 L117,130 L175,145 L232,138 L289,63 L346,138 L404,85 L461,123 L518,145 L576,115 L633,153 L690,175"
+                  fill="none" stroke="var(--crimson)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+
+            <!-- peak markers -->
+            <g fill="var(--crimson)">
+              <circle cx="60" cy="78" r="5"/><circle cx="289" cy="63" r="5"/>
+              <circle cx="404" cy="85" r="5"/><circle cx="576" cy="115" r="5"/>
+            </g>
+            <g class="svg-label-b" fill="var(--ink)">
+              <text x="68" y="66">계정 가입 장벽</text>
+              <text x="289" y="50" text-anchor="middle">첫 에러 경험</text>
+              <text x="404" y="72" text-anchor="middle">내 데이터 준비 실패</text>
+              <text x="576" y="102" text-anchor="middle">트랙 선택 부담</text>
+            </g>
+
+            <!-- x axis weeks -->
+            <g class="svg-num" text-anchor="middle" fill="var(--ink-mute)">
+              <text x="60" y="206">1주</text><text x="117" y="206">2</text><text x="175" y="206">3</text>
+              <text x="232" y="206">4</text><text x="289" y="206">5</text><text x="346" y="206">6</text>
+              <text x="404" y="206">7</text><text x="461" y="206">8</text><text x="518" y="206">9</text>
+              <text x="576" y="206">10</text><text x="633" y="206">11</text><text x="690" y="206">12주</text>
+            </g>
+
+            <!-- phase bands -->
+            <g>
+              <rect x="34" y="218" width="163" height="22" fill="var(--indigo)" opacity=".16" rx="2"/>
+              <rect x="203" y="218" width="163" height="22" fill="var(--indigo)" opacity=".28" rx="2"/>
+              <rect x="372" y="218" width="163" height="22" fill="var(--indigo)" opacity=".42" rx="2"/>
+              <rect x="541" y="218" width="163" height="22" fill="var(--indigo)" opacity=".58" rx="2"/>
+              <g class="svg-label-b" text-anchor="middle" fill="var(--ink)">
+                <text x="115" y="233">1단계 즉시 효용</text><text x="284" y="233">2단계 앱 제작</text>
+                <text x="453" y="233">3단계 대시보드</text><text x="622" y="233">4단계 프로젝트</text>
+              </g>
+            </g>
+
+            <!-- interventions -->
+            <text class="svg-label-b" x="0" y="266" fill="var(--celadon)">방어 장치</text>
+            <g class="svg-label" fill="var(--ink-soft)">
+              <text x="66" y="266">사전 OT에서 계정 개설 완료</text>
+              <text x="290" y="266" text-anchor="middle">5주차 = 에러 대응 전용 회차</text>
+              <text x="576" y="266" text-anchor="middle">9주차에 트랙 사전 상담</text>
+              <text x="404" y="284" text-anchor="middle">6주차 종료 시 데이터 지참 안내 + 조교 사전 점검</text>
+            </g>
+          </svg>
+        </div>
+        <figcaption><b>읽는 법.</b> 곡선이 높을수록 그 주에 수강생이 그만둘 확률이 큽니다. 네 개의 봉우리는 각각 원인이 다르고 대응도 다릅니다. 특히 <b>5주차 봉우리는 커리큘럼으로만 막을 수 있습니다</b> — 에러를 만나기 전에 에러 다루는 법을 먼저 가르치는 것이 유일한 해법입니다.</figcaption>
+      </figure>
+
+      <div class="stack">
+        <div class="card principle">
+          <div class="mark">一</div>
+          <div>
+            <h3>설치 금지 — 전 과정 브라우저에서</h3>
+            <p>파이썬 설치, 개발도구, 터미널이 하나라도 들어가면 그날 강의는 설치 지원으로 끝납니다. 국내 공공과정이 전부 웹 기반 도구만 쓰는 이유가 이것입니다. <b>계정 가입조차 1주차 수업 시간에 하지 마십시오</b> — 휴대폰 인증과 결제수단 등록에서 첫 회차가 통째로 날아갑니다. 사전 오리엔테이션이나 사무국 대행으로 미리 끝내야 합니다.</p>
+          </div>
+        </div>
+        <div class="card principle">
+          <div class="mark">二</div>
+          <div>
+            <h3>코드는 보되 쓰지 않는다</h3>
+            <p>AI가 만든 코드를 화면에 띄워 보여주되 타이핑은 시키지 않습니다. 오타 하나로 자존감이 무너지고, 그 감정은 다음 주 결석으로 이어집니다. 대신 <b>"이 부분 글씨를 더 크게 해줘"</b>처럼 말로 고치는 경험을 반복시키면 통제감이 생깁니다. 이 대상층에게 필요한 것은 문법이 아니라 <b>내가 이 물건의 주인이라는 감각</b>입니다.</p>
+          </div>
+        </div>
+        <div class="card principle">
+          <div class="mark">三</div>
+          <div>
+            <h3>첫 주제는 반드시 본인의 것</h3>
+            <p>예제 데이터로 만든 대시보드는 아무 감흥이 없습니다. 본인 가계부, 혈압 기록, 동호회 회비 장부, 손주 사진, 산행 기록 — 자기 데이터가 들어가는 순간 몰입도가 달라집니다. 국내 공공과정이 대체로 예제 데이터를 쓰는 것은 개인정보 부담 때문이며, 본 과정은 그 부담을 <b>08장의 데이터 취급 규칙으로 관리하고 실데이터를 씁니다</b>. 이것이 본 과정의 가장 큰 차별점입니다.</p>
+          </div>
+        </div>
+        <div class="card principle">
+          <div class="mark">四</div>
+          <div>
+            <h3>에러 대응을 정식 교과로 편입</h3>
+            <p>화면이 하얗게 뜨는 순간이 최대 이탈 지점입니다. 5주차를 통째로 <b>일부러 에러를 내고 AI에게 고쳐달라고 하는 실습</b>에 배정하십시오. "에러 = 내가 못한 것"이 아니라 "에러 = 붙여넣고 물어보면 되는 것"으로 각인시키는 것이 12주를 완주시키는 단일 최대 변수입니다.</p>
+          </div>
+        </div>
+        <div class="card principle">
+          <div class="mark">五</div>
+          <div>
+            <h3>동년배가 옆에 있어야 한다</h3>
+            <p>서울시50플러스재단은 중장년 대상임을 고려해 <b>시니어 강사를 따로 선발</b>했고, 과기정통부는 <b>노노교육 보조강사 제도</b>를 운영합니다. 두 기관이 독립적으로 같은 결론에 도달했다는 것은 이것이 취향의 문제가 아니라는 뜻입니다. 20대 조교에게 모르는 것을 묻는 일은 이 대상층에게 심리적 비용이 큽니다. <b>조교는 동년배 또는 앞 기수 수료생 중에서 뽑고, 2인 1조 짝을 고정</b>하십시오.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 04 ================= -->
+  <section id="s4">
+    <div class="sec-head"><span class="n">04</span>
+      <div><h2>12주 커리큘럼</h2>
+      <p class="note">매주 손에 남는 결과물이 하나씩 있습니다. 성취가 누적되어야 12주를 버팁니다.</p></div>
+    </div>
+
+    <div class="stack-lg">
+      <figure>
+        <div class="figbox">
+          <svg viewBox="0 0 720 300" role="img" aria-label="4단계 성취 누적 계단 도표. 1단계 즉시 효용, 2단계 앱 제작, 3단계 대시보드, 4단계 트랙 프로젝트로 성취 수준이 단계적으로 상승.">
+            <text class="svg-title" x="0" y="14">성취는 계단처럼 쌓인다</text>
+            <text class="svg-label" x="0" y="32">각 단계는 앞 단계의 결과물을 재료로 씁니다. 건너뛸 수 없는 구조입니다.</text>
+
+            <g>
+              <rect x="40" y="212" width="160" height="46" fill="var(--indigo)" opacity=".16" rx="2"/>
+              <rect x="200" y="166" width="160" height="92" fill="var(--indigo)" opacity=".28" rx="2"/>
+              <rect x="360" y="120" width="160" height="138" fill="var(--indigo)" opacity=".42" rx="2"/>
+              <rect x="520" y="74" width="160" height="184" fill="var(--indigo)" opacity=".58" rx="2"/>
+              <g stroke="var(--indigo)" stroke-width="1.5" fill="none" opacity=".55">
+                <path d="M40,212 L200,212 L200,166 L360,166 L360,120 L520,120 L520,74 L680,74"/>
+              </g>
+              <line x1="40" y1="258" x2="680" y2="258" stroke="var(--ink-mute)" stroke-width="1"/>
+            </g>
+
+            <g class="svg-label-b" fill="var(--ink)">
+              <text x="56" y="232">1단계 · 1–3주</text>
+              <text x="216" y="186">2단계 · 4–6주</text>
+              <text x="376" y="140">3단계 · 7–9주</text>
+              <text x="536" y="94">4단계 · 10–12주</text>
+            </g>
+            <g class="svg-label" fill="var(--ink-soft)">
+              <text x="56" y="248">즉시 효용</text>
+              <text x="216" y="202">말로 앱 만들기</text>
+              <text x="376" y="156">데이터와 대시보드</text>
+              <text x="536" y="110">트랙별 개인 프로젝트</text>
+            </g>
+            <g class="svg-label" fill="var(--ochre)" font-style="italic">
+              <text x="56" y="276">"내 엑셀 문제가 풀렸다"</text>
+              <text x="216" y="276">"내 앱이 생겼다"</text>
+              <text x="376" y="276">"내 데이터가 그림이 됐다"</text>
+              <text x="536" y="276">"내 이름의 결과물"</text>
+            </g>
+            <text class="svg-num" x="16" y="78" fill="var(--ink-mute)" transform="rotate(-90 16 170)" text-anchor="middle">성취 수준</text>
+          </svg>
+        </div>
+        <figcaption><b>구조의 의미.</b> 4주차 앱은 1주차에 정리한 엑셀 데이터를 씁니다. 8주차 대시보드는 6주차 앱이 쌓은 기록을 씁니다. 12주차 프로젝트는 그 전부를 씁니다. <b>결석하면 다음 주 재료가 없어지는 구조</b>라서, 이 설계 자체가 출석 유인이 됩니다.</figcaption>
+      </figure>
+
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>주</th><th>주제</th><th>다루는 것</th><th>그날 손에 남는 것</th></tr></thead>
+          <tbody>
+            <tr class="phase-row"><td colspan="4">1단계 · 즉시 효용 — "이걸 진작 알았으면"</td></tr>
+            <tr><td class="wk">1</td><td><b>AI에게 제대로 시키는 법</b><br>+ 엑셀·문서 실무에 얹기</td><td>지시문 쓰는 법, 파일 첨부, 결과 검증. <b>본인이 실제로 막혔던 엑셀 문제 3개를 가져와 그 자리에서 해결.</b></td><td>내 엑셀 문제 3건 해결 기록</td></tr>
+            <tr><td class="wk">2</td><td><b>긴 문서 다루기</b></td><td>보험증권·아파트 관리규약·계약서·건강검진 결과지를 넣고 요약·비교·독소조항 찾기. AI 환각과 검증법을 여기서 명시적으로 다룸.</td><td>내 보험 중복보장 점검표</td></tr>
+            <tr><td class="wk">3</td><td><b>이미지·영상 + 디지털 안전</b></td><td>행사 초대장·포스터 제작. 후반 40분은 <b>딥페이크 보이스피싱 실습</b> — 목소리 복제를 직접 보여주고 대응법 교육.</td><td>가족 행사 초대장 / 안전 수칙 카드</td></tr>
+
+            <tr class="phase-row"><td colspan="4">2단계 · 말로 앱 만들기 — 성취감의 정점</td></tr>
+            <tr><td class="wk">4</td><td><b>대화만으로 웹앱 만들기</b></td><td>바이브 코딩 첫 경험. 복약 알리미 또는 가계부 앱 중 택1. 코드는 보여주되 타이핑 없음.</td><td>동작하는 내 첫 앱</td></tr>
+            <tr><td class="wk">5</td><td><b>고치기와 에러 대응</b><br><span class="pill new">이탈 방어 회차</span></td><td>일부러 앱을 망가뜨린 뒤 AI에게 고쳐 달라고 요청. 에러 메시지를 그대로 복사해 붙이는 훈련을 반복.</td><td>개선된 앱 + 공유 링크</td></tr>
+            <tr><td class="wk">6</td><td><b>계산기형 앱 만들기</b></td><td>연금 개시 시점별 수령액 비교, 은퇴 후 현금흐름 시뮬레이터. 숫자를 다뤄본 사무직 경험이 그대로 활용되는 회차.</td><td>내 연금 시뮬레이터</td></tr>
+
+            <tr class="phase-row"><td colspan="4">3단계 · 데이터와 대시보드 — 사무직 경험이 빛나는 구간</td></tr>
+            <tr><td class="wk">7</td><td><b>내 데이터 확보와 정리</b></td><td>카드사 내역 내려받기, 검진결과 입력, 회비 장부 정리. <b>개인정보 마스킹 규칙을 먼저 적용한 뒤 시작.</b></td><td>정제된 내 데이터셋</td></tr>
+            <tr><td class="wk">8</td><td><b>대시보드 만들기 ①</b></td><td>무엇을 볼 것인가(지표 설계) → 어떤 그림으로 볼 것인가(차트 선택). 지출 또는 건강 중 택1.</td><td>1차 대시보드</td></tr>
+            <tr><td class="wk">9</td><td><b>대시보드 만들기 ②</b><br>+ 트랙 사전 상담</td><td>데이터 갱신과 공유 설정. 수업 후반 30분은 조교가 <b>1:1 트랙 상담</b>을 진행해 10주차 선택 부담을 미리 해소.</td><td>완성 대시보드 링크 + 트랙 확정</td></tr>
+
+            <tr class="phase-row"><td colspan="4">4단계 · 트랙별 개인 프로젝트</td></tr>
+            <tr><td class="wk">10</td><td><b>기획과 재료 준비</b></td><td>트랙별로 분반. 무엇을 만들지 확정하고 필요한 자료를 모음.</td><td>프로젝트 기획서 1장</td></tr>
+            <tr><td class="wk">11</td><td><b>제작과 상호 피드백</b></td><td>제작 집중. 중간에 짝끼리 서로의 결과물을 써 보고 고칠 점을 말해주는 시간 확보.</td><td>프로젝트 초안</td></tr>
+            <tr><td class="wk">12</td><td><b>발표회</b><br><span class="pill ok">수료</span></td><td>1인당 5분 발표. <b>그 자리에서 가족·지인에게 결과물 링크를 실제로 전송하는 것</b>까지가 커리큘럼입니다.</td><td>완성 결과물 + 수료증 + 전송 완료</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout warn">
+        <span class="tag">8주로 줄여야 한다면</span>
+        <p>3단계를 2주로 압축(7·8주차 통합)하고 4단계를 1주 제작 + 1주 발표로 줄이십시오. 총 16시간이 되어 국내 공공과정 표준 범위에 들어옵니다. <b>절대 빼면 안 되는 것은 5주차(에러 대응)와 마지막 발표회</b>입니다. 앞은 완주율을 결정하고, 뒤는 재등록과 입소문을 결정합니다. 1주차 엑셀 회차도 유지하십시오 — 이 대상층의 신뢰를 얻는 유일한 회차입니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 05 ================= -->
+  <section id="s5">
+    <div class="sec-head"><span class="n">05</span>
+      <div><h2>트랙별 프로젝트와 주제 은행</h2>
+      <p class="note">10주차에 네 갈래로 나뉩니다. 동기가 다른 사람을 하나의 결과물로 묶으면 만족도가 떨어지기 때문입니다.</p></div>
+    </div>
+
+    <div class="stack-lg">
+      <figure>
+        <div class="figbox">
+          <svg viewBox="0 0 720 250" role="img" aria-label="트랙 분기도. 1주에서 9주까지 공통 과정을 거친 뒤 10주차에 제2커리어, 자산관리, 기록과 유산, 모임과 창업 네 개 트랙으로 분기.">
+            <text class="svg-title" x="0" y="14">10주차 분기 구조</text>
+
+            <g fill="none" stroke-width="2.5" stroke-linecap="round">
+              <path d="M60,140 L250,140" stroke="var(--indigo)" stroke-width="7" opacity=".5"/>
+              <path d="M250,140 C330,140 340,50 420,50" stroke="var(--ochre)"/>
+              <path d="M250,140 C330,140 340,110 420,110" stroke="var(--celadon)"/>
+              <path d="M250,140 C330,140 340,170 420,170" stroke="var(--indigo)"/>
+              <path d="M250,140 C330,140 340,225 420,225" stroke="var(--indigo-soft)"/>
+            </g>
+            <g>
+              <circle cx="420" cy="50" r="5" fill="var(--ochre)"/>
+              <circle cx="420" cy="110" r="5" fill="var(--celadon)"/>
+              <circle cx="420" cy="170" r="5" fill="var(--indigo)"/>
+              <circle cx="420" cy="225" r="5" fill="var(--indigo-soft)"/>
+              <circle cx="250" cy="140" r="6" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/>
+            </g>
+
+            <text class="svg-label-b" x="60" y="128">1–9주 공통 과정</text>
+            <text class="svg-label" x="60" y="163">AI 실무 · 앱 제작 · 대시보드</text>
+            <text class="svg-num" x="250" y="118" text-anchor="middle" fill="var(--ink-mute)">9주차 상담</text>
+
+            <g class="svg-label-b">
+              <text x="436" y="46">제2커리어 트랙</text>
+              <text x="436" y="106">자산관리 트랙</text>
+              <text x="436" y="166">기록·유산 트랙</text>
+              <text x="436" y="221">모임·창업 트랙</text>
+            </g>
+            <g class="svg-label" fill="var(--ink-soft)">
+              <text x="436" y="62">컨설팅 소개 페이지 · 경력기술서 · AI 강의조교</text>
+              <text x="436" y="122">연금·지출·자산 통합 대시보드</text>
+              <text x="436" y="182">AI 인터뷰 자서전 · 가족 아카이브</text>
+              <text x="436" y="237">총무 시스템 · 소상공인 매출 대시보드</text>
+            </g>
+          </svg>
+        </div>
+        <figcaption><b>운영 유의.</b> 트랙은 10주차에 고르는 것이 아니라 <b>9주차 상담에서 확정</b>합니다. 선택 자체가 부담이 되어 이탈로 이어지는 것을 막기 위해서입니다. 트랙별 최소 인원은 3명 — 미달 시 인접 트랙과 병합하십시오.</figcaption>
+      </figure>
+
+      <h3>주제 은행</h3>
+      <p class="lead prose">아래는 이 대상층에서 실제로 반응이 큰 주제를 분야별로 모은 것입니다. 강사는 매 회차 실습 주제를 여기서 골라 쓰고, 수강생은 10주차 프로젝트 주제를 여기서 고릅니다.</p>
+
+      <div class="grid2">
+        <div class="card">
+          <h3 style="color:var(--ochre)">돈 — 가장 강한 동기</h3>
+          <ul class="clean">
+            <li>연금 3층(국민·퇴직·개인) 개시 시점별 수령액 비교</li>
+            <li>은퇴 후 현금흐름 대시보드 — 몇 살까지 버티는가</li>
+            <li>카드 내역 자동 분류 + 월별 지출 추이</li>
+            <li>건강보험 지역가입자 전환 시뮬레이션</li>
+            <li>보험증권 다중 비교 → 중복보장·보장공백 점검표</li>
+            <li>배당 포트폴리오 + 배당금 입금 캘린더</li>
+            <li>주택연금 vs 전세 전환 vs 매도 3안 비교표</li>
+            <li>상속·증여 시나리오 정리 → 세무사 상담용 질문지</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="color:var(--celadon)">건강</h3>
+          <ul class="clean">
+            <li>혈압·혈당·체중·걸음수 기록 앱과 추이 그래프</li>
+            <li>다약제 복약 스케줄러</li>
+            <li>건강검진 결과 5년치 수치 시계열 비교</li>
+            <li>병원 방문 전 증상·질문 정리 도우미</li>
+            <li>부모님 돌봄 기록 형제 공유 시트</li>
+            <li>등산·자전거·수영 기록 대시보드</li>
+            <li>식단·혈당 상관관계 기록</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>경력 자산화 — 이 대상층 고유</h3>
+          <ul class="clean">
+            <li>30년 경력을 경력기술서·컨설팅 소개서로 재구성</li>
+            <li>강의안 만들기 — 은퇴 사무직의 상당수가 강사로 전환</li>
+            <li>업무 노하우를 전자책·PDF 매뉴얼로</li>
+            <li>AI와 모의면접, 예상질문 대응 연습</li>
+            <li>자격증 공부 도우미 — 요약·예상문제·오답노트</li>
+            <li>개인 브랜드 원페이지 웹사이트 + 명함 QR</li>
+            <li>창업 아이템 시장조사와 사업계획서 초안</li>
+            <li>링크드인·잡코리아 프로필 정비</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>기억과 유산 — 정서적 임팩트 최대</h3>
+          <ul class="clean">
+            <li><b>AI가 인터뷰하며 쓰는 자서전</b> — 매주 질문에 답하면 원고가 쌓임</li>
+            <li>부모님 구술 녹음 → 텍스트 → 책 형태로</li>
+            <li>손주 사진첩 웹페이지, 가족 연대기</li>
+            <li>오래된 흑백사진 복원·컬러화</li>
+            <li>어머니 레시피 아카이브</li>
+            <li>가족 행사 D-day 공유 페이지</li>
+            <li>유언·상속 의사 정리 문서(법적 효력은 별도 확인)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>사회활동 — 은퇴자 정체성의 핵심</h3>
+          <ul class="clean">
+            <li>동호회·동창회 회비 장부와 정산 대시보드</li>
+            <li>참석 집계·공지문·회원 명부 자동화</li>
+            <li>여행 계획표 — 일정·예산·지도·체크리스트 한 페이지</li>
+            <li>여행 사진 → 여행기 웹페이지</li>
+            <li>봉사단체 활동 기록, 종중·문중 자료 정리</li>
+            <li>총무 인수인계 문서 자동 생성</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>소상공인·부업 실무</h3>
+          <ul class="clean">
+            <li>매출·재고 관리 시트와 사장님 대시보드</li>
+            <li>메뉴판·전단지·간판 시안 제작</li>
+            <li>블로그·인스타 콘텐츠 초안 자동화</li>
+            <li>리뷰 답글과 고객 응대 문구 세트</li>
+            <li>상권·경쟁점 조사 자료 정리</li>
+            <li>간이 세금계산·부가세 정리 시트</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>사무 스킬의 전환 — 홈그라운드</h3>
+          <ul class="clean">
+            <li><b>엑셀 함수·피벗·매크로를 AI에게 시키기</b></li>
+            <li>아파트 관리규약·계약서·약관 요약과 독소조항 찾기</li>
+            <li>회의 녹음 → 회의록 자동 정리</li>
+            <li>공문·민원 답변·항의 메일 작성</li>
+            <li>PPT 초안과 장표 구조 잡기</li>
+            <li>번역 — 해외 자녀, 직구, 여행</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>취미·자기실현</h3>
+          <ul class="clean">
+            <li>유튜브 기획·자막·썸네일</li>
+            <li>AI로 그림 그리기, 음악 만들기</li>
+            <li>텃밭 일지와 작물 캘린더</li>
+            <li>시집·에세이 원고 정리와 자비출판</li>
+            <li>반려동물 건강 기록</li>
+            <li>독서 기록과 서평 아카이브</li>
+          </ul>
+        </div>
+        <div class="card" style="border-color:var(--crimson)">
+          <h3 style="color:var(--crimson)">디지털 안전 — 선택 아닌 필수</h3>
+          <ul class="clean">
+            <li><b>AI 목소리 복제와 딥페이크 보이스피싱</b> — 직접 시연할 것</li>
+            <li>AI를 내세운 투자·수익 사기 판별</li>
+            <li>AI에 절대 입력하면 안 되는 정보 목록</li>
+            <li>환각 검증법 — 출처 요구, 교차 확인</li>
+            <li>구독료 관리와 자동결제 해지</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 06 ================= -->
+  <section id="s6">
+    <div class="sec-head"><span class="n">06</span>
+      <div><h2>1회차 운영 표준</h2>
+      <p class="note">매 회차 120분을 같은 리듬으로 운영합니다. 리듬이 고정되면 예측 가능해지고, 예측 가능해지면 불안이 줄어듭니다.</p></div>
+    </div>
+
+    <div class="stack-lg">
+      <figure>
+        <div class="figbox">
+          <svg viewBox="0 0 720 210" role="img" aria-label="120분 회차 시간 배분. 지난주 결과 공유 10분, 오늘 만들 것 시연 15분, 직접 실습 60분, 막힌 것 해결 20분, 정리와 다음주 재료 안내 15분.">
+            <text class="svg-title" x="0" y="14">1회차 120분 표준 배분</text>
+            <text class="svg-label" x="0" y="32">설명은 최대 25분. 절반은 반드시 직접 만드는 시간입니다.</text>
+
+            <g transform="translate(0,54)">
+              <rect x="40" y="0" width="53" height="34" fill="var(--indigo)" opacity=".3" rx="2"/>
+              <rect x="93" y="0" width="80" height="34" fill="var(--indigo)" opacity=".5" rx="2"/>
+              <rect x="173" y="0" width="320" height="34" fill="var(--ochre)" rx="2"/>
+              <rect x="493" y="0" width="107" height="34" fill="var(--celadon)" opacity=".6" rx="2"/>
+              <rect x="600" y="0" width="80" height="34" fill="var(--indigo)" opacity=".35" rx="2"/>
+
+              <text class="svg-label-b" x="333" y="22" text-anchor="middle" fill="#fff">직접 실습 60분</text>
+              <text class="svg-label" x="546" y="22" text-anchor="middle" fill="var(--ink)">해결 20분</text>
+
+              <g stroke="var(--line)" stroke-width="1">
+                <line x1="66" y1="38" x2="66" y2="58"/><line x1="133" y1="38" x2="133" y2="72"/>
+                <line x1="546" y1="38" x2="546" y2="58"/><line x1="640" y1="38" x2="640" y2="86"/>
+              </g>
+              <g class="svg-label" fill="var(--ink-soft)">
+                <text x="66" y="72" text-anchor="middle">지난주 결과 공유 · 10분</text>
+                <text x="133" y="86" text-anchor="middle">오늘 만들 것 시연 · 15분</text>
+                <text x="640" y="100" text-anchor="end">정리 + 다음주 재료 안내 · 15분</text>
+              </g>
+              <g class="svg-num" fill="var(--ink-mute)">
+                <text x="40" y="126">0분</text><text x="333" y="126" text-anchor="middle">60분</text><text x="680" y="126" text-anchor="end">120분</text>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <figcaption><b>첫 10분이 가장 중요합니다.</b> 지난주 결과물을 서로 보여주는 시간으로 시작하면, 결석한 사람은 다음 주에 반드시 나옵니다. 반대로 출석 체크로 시작하면 결석이 창피해져 그대로 이탈합니다.</figcaption>
+      </figure>
+
+      <div class="grid2">
+        <div class="card">
+          <h3>조교 회차별 체크리스트</h3>
+          <ul class="clean">
+            <li><b>수업 전</b> — 전원 로그인 상태 확인, 브라우저 확대 배율 점검, 지난주 결과물 링크 수집</li>
+            <li><b>실습 중</b> — 손 든 사람보다 <b>화면이 멈춘 사람</b>을 먼저 찾을 것. 이 대상층은 모르는 것을 잘 묻지 않습니다</li>
+            <li><b>대응 원칙</b> — 조교가 대신 타이핑해 주지 말 것. 반드시 수강생 손으로 하게 하고 말로만 안내</li>
+            <li><b>수업 후</b> — 미완성자 별도 기록, 2회 연속 미완성 시 개별 연락</li>
+            <li><b>매주</b> — 결과물 아카이브 페이지에 링크 추가</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>강의 환경 기준</h3>
+          <ul class="clean">
+            <li>강사 화면 글자 크기 최소 18pt 상당, 커서 강조 기능 상시 사용</li>
+            <li>수강생 브라우저 확대 배율은 <b>1주차에 함께 설정</b>하고 그대로 유지</li>
+            <li>유인물은 종이로. 스크린샷을 크게 넣을 것 — 온라인 자료보다 실제 사용률이 훨씬 높습니다</li>
+            <li>2인 1조 짝 고정. 자리 배치도 12주 내내 고정</li>
+            <li>결과물 아카이브 페이지를 1주차에 개설해 매주 누적</li>
+            <li>보조 모니터 또는 대형 화면 2대 권장 — 앞자리만 보이는 구조를 피할 것</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout">
+        <span class="tag">강사에게</span>
+        <p>1주차 엑셀 실습에서 <b>수강생이 강사보다 엑셀을 잘하는 상황이 반드시 발생합니다.</b> 이것은 사고가 아니라 정상이며, 오히려 좋은 기회입니다. "제가 가르쳐 드립니다"가 아니라 <b>"여러분 실력에 AI를 붙이면 어떻게 되는지 보시죠"</b>로 화법을 통일하십시오. 이 한 문장이 12주 전체의 관계를 결정합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 07 ================= -->
+  <section id="s7">
+    <div class="sec-head"><span class="n">07</span>
+      <div><h2>도구 스택과 Claude Skills</h2>
+      <p class="note">수강생이 쓰는 도구는 최대 3개까지. 그 이상은 "어디에 뭐가 있는지" 자체가 학습 부담이 됩니다.</p></div>
+    </div>
+
+    <div class="stack-lg">
+      <div>
+        <h3 style="margin-bottom:12px">수강생용 도구</h3>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>용도</th><th>주 도구</th><th>대안</th><th>투입 회차</th></tr></thead>
+            <tbody>
+              <tr><td>대화형 AI (주력 1개만)</td><td>Claude 또는 ChatGPT</td><td>Gemini, CLOVA X</td><td class="wk">1–12</td></tr>
+              <tr><td>말로 앱 만들기</td><td>Claude Artifacts</td><td>ChatGPT Canvas, Gemini Canvas</td><td class="wk">4–6</td></tr>
+              <tr><td>이미지 생성</td><td>Gemini 이미지 모델(<b>나노바나나</b>)</td><td>각 AI 내장 생성 기능, Canva</td><td class="wk">3</td></tr>
+              <tr><td>표·데이터</td><td>구글 스프레드시트</td><td>엑셀 온라인</td><td class="wk">7–9</td></tr>
+              <tr><td>대시보드</td><td>AI로 만든 웹 대시보드</td><td>Looker Studio (코드 없이)</td><td class="wk">8–9</td></tr>
+              <tr><td>문서·슬라이드</td><td>Gamma</td><td>구글 슬라이드</td><td class="wk">10–12</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note" style="margin-top:10px;font-size:.87rem;color:var(--ink-mute)">국내 공공과정은 대체로 ChatGPT 또는 Gemini 단일 도구로 운영합니다. 민간 국비과정만 다중 스택(ChatGPT·Claude·Gemini·CLOVA X)을 씁니다. <b>본 과정은 공공 방식을 따라 주력 1개를 정하고 나머지는 소개만 하십시오.</b></p>
+      </div>
+
+      <div>
+        <h3 style="margin-bottom:6px">Claude Skills — 강사·운영진용</h3>
+        <p class="lead prose" style="margin-bottom:16px">Skills는 <b>수강생에게 가르칠 내용이 아닙니다.</b> 12주 동안 강사와 운영진이 만들어야 할 유인물·평가표·수료증·발표자료를 자동화하는 <b>운영 측 생산성 도구</b>로만 씁니다. 이것을 커리큘럼에 넣으면 난이도가 붕괴합니다.</p>
+
+        <div class="grid2">
+          <div class="card">
+            <h3>공식 스킬 (Anthropic)</h3>
+            <p style="margin-bottom:10px">저장소: <a href="https://github.com/anthropics/skills">github.com/anthropics/skills</a></p>
+            <ul class="clean">
+              <li><b>document-skills</b> — <code>docx</code> 유인물·수료증, <code>xlsx</code> 출석부·평가표, <code>pptx</code> 강의 슬라이드, <code>pdf</code> 배포자료 (source-available)</li>
+              <li><b>example-skills</b> — 창작·디자인·개발·커뮤니케이션 예제 12종 (Apache 2.0)</li>
+            </ul>
+            <p style="margin-top:12px;font-size:.87rem">claude.ai 유료 플랜에서 바로 사용 가능하며 커스텀 스킬 업로드를 지원합니다. Claude Code에서는 <code>/plugin marketplace add anthropics/skills</code>로 설치합니다.</p>
+          </div>
+          <div class="card">
+            <h3>스킬의 구조</h3>
+            <p style="margin-bottom:10px">폴더 하나에 <code>SKILL.md</code> 한 장이면 성립합니다. 나머지는 선택입니다.</p>
+            <ul class="clean">
+              <li><code>SKILL.md</code> — 이름·설명·지시사항 <b>(필수)</b></li>
+              <li><code>scripts/</code> — 실행 코드</li>
+              <li><code>references/</code> — 참고 문서</li>
+              <li><code>assets/</code> — 템플릿·서식</li>
+            </ul>
+            <p style="margin-top:12px;font-size:.87rem"><code>description</code>에 "언제 쓰는지"를 적어두면 필요한 순간에 자동으로 불려 나옵니다.</p>
+          </div>
+        </div>
+
+        <div class="callout" style="margin-top:16px">
+          <span class="tag">이 과정을 위해 직접 만들 만한 스킬 3종</span>
+          <p><b>① 주차별 유인물 생성</b> — 회차 번호를 주면 큰 글씨 스크린샷 자리와 실습 지시문이 들어간 종이 유인물을 서식 그대로 뽑아냅니다. 12주 × 매 기수마다 반복되는 작업이라 회수가 가장 빠릅니다.<br>
+          <b>② 수강생 결과물 피드백</b> — 제출된 결과물 링크를 넣으면 "잘한 점 2가지 + 다음에 시도해 볼 것 1가지" 형식의 격려형 피드백 초안을 만듭니다. 지적이 아니라 격려 형식이어야 한다는 원칙을 스킬에 못 박아 두십시오.<br>
+          <b>③ 트랙 상담 준비</b> — 9주차 상담 전에 수강생의 1~8주차 결과물을 훑고 어울리는 트랙과 추천 주제 3개를 정리합니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 08 ================= -->
+  <section id="s8">
+    <div class="sec-head"><span class="n">08</span>
+      <div><h2>평가·수료·리스크 관리</h2>
+      <p class="note">평가는 점수화하지 않습니다. 시험 스트레스는 이 대상층에서 가장 확실한 이탈 요인입니다.</p></div>
+    </div>
+
+    <div class="stack-lg">
+      <div class="grid2">
+        <div class="card">
+          <h3>수료 기준</h3>
+          <ul class="clean">
+            <li>12회 중 <b>8회 이상 출석</b></li>
+            <li>최종 프로젝트 결과물 <b>1건 제출</b></li>
+            <li>발표회 참여 (발표 5분 또는 전시 참여)</li>
+          </ul>
+          <p style="margin-top:12px;font-size:.88rem">등급·석차·점수는 매기지 않습니다. 서울시50플러스재단이 발표회에서 <b>우수 프로젝트 시상</b>을 하는 방식을 참고하되, 시상은 순위가 아니라 <b>부문별</b>(가장 실용적인 / 가장 따뜻한 / 가장 뜻밖의)로 나눠 가급적 많은 인원이 받게 하십시오.</p>
+        </div>
+        <div class="card">
+          <h3>개인 데이터 취급 규칙 <span class="pill new">7주차 전 필수 고지</span></h3>
+          <ul class="clean">
+            <li>업로드 <b>금지</b> — 주민등록번호, 계좌번호, 카드번호 전체, 비밀번호, 타인의 개인정보</li>
+            <li>업로드 <b>허용</b> — 금액·날짜·항목명만 남긴 내역, 수치만 남긴 검진 결과</li>
+            <li>파일을 올리기 전 <b>마스킹 작업을 조교와 함께</b> 수행 (7주차 첫 20분)</li>
+            <li>동호회 회비 장부 등 <b>타인 데이터는 이름을 이니셜로 치환</b>한 뒤 사용</li>
+            <li>과정 종료 시 업로드 자료 삭제 방법을 12주차에 안내</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>리스크 등록부</h3>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>리스크</th><th>발생 시점</th><th>영향</th><th>대응</th></tr></thead>
+          <tbody>
+            <tr><td><b>계정 가입 실패</b><br>휴대폰 인증·해외 결제수단</td><td class="wk">1주 전</td><td>1주차 전체 소실</td><td>사전 OT 또는 사무국 대행으로 <b>개강 전 완료</b>. 예비 계정 5개 확보.</td></tr>
+            <tr><td><b>유료 사용량 한도 소진</b></td><td class="wk">4–9주</td><td>수업 중단</td><td>계정 비용을 수강료에 포함. 한도 소진 시 대체 도구 동선을 사전 확정.</td></tr>
+            <tr><td><b>AI 환각으로 인한 오정보</b><br>연금·세금·건강 영역</td><td class="wk">2, 6주</td><td>기관 신뢰·법적 책임</td><td>2주차에 검증법을 명시적 교육. 모든 유인물에 <b>"AI 답변은 전문가 확인 필요"</b> 고정 문구. 강사는 개별 상담에 응하지 않음.</td></tr>
+            <tr><td><b>개인정보 유출</b></td><td class="wk">7–9주</td><td>중대</td><td>좌측 취급 규칙 적용. 서면 동의서 수령.</td></tr>
+            <tr><td><b>도구 UI 변경</b></td><td class="wk">상시</td><td>교재 무효화</td><td>교재를 <b>"무엇을 시킬 것인가"</b> 중심으로 작성. 화면 위치 서술은 최소화. 유인물은 회차 직전 출력.</td></tr>
+            <tr><td><b>트랙 인원 편중</b></td><td class="wk">9–10주</td><td>운영 불가</td><td>트랙별 최소 3명. 미달 시 인접 트랙 병합. 자산관리 트랙에 쏠릴 가능성이 가장 높음.</td></tr>
+            <tr><td><b>강사 역량 편차</b><br>특히 자산관리 트랙</td><td class="wk">10–12주</td><td>만족도 급락</td><td>트랙별 담당 강사를 사전 배정하고, 자산관리 트랙은 <b>금융 배경 강사 또는 외부 자문</b>을 붙일 것.</td></tr>
+            <tr><td><b>중도 이탈</b></td><td class="wk">1, 5, 7, 10주</td><td>완주율</td><td>03장 방어 장치 적용. 2회 연속 결석 시 조교 개별 연락을 <b>운영 규정으로 명문화</b>.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 출처 ================= -->
+  <section id="src">
+    <div class="sec-head"><span class="n">—</span>
+      <div><h2>조사 출처</h2>
+      <p class="note">2026년 8월 기준 공개 자료. 각 기관의 모집 요강은 학기마다 바뀌므로 실제 기획 시 재확인이 필요합니다.</p></div>
+    </div>
+    <ul class="srclist">
+      <li><a href="https://www.50plus.or.kr/">서울시 50플러스포털 · 일자리 정보몽땅</a> — AI디지털교육 과정 상세, 회차별 커리큘럼, 정원·수강료</li>
+      <li><a href="https://www.lecturernews.com/news/articleView.html?idxno=200278">한국강사신문</a> — 서울시50플러스재단 중장년 1,500명 AI 실전 교육 기초·중급·고급 구성</li>
+      <li><a href="https://mediahub.seoul.go.kr/archives/2017696">서울시 내 손안에 서울</a> — 50플러스 AI 실전 교육 운영 방식, 시니어 강사 선발</li>
+      <li><a href="https://www.womennews.co.kr/news/articleView.html?idxno=279149">여성신문</a> — 서대문50플러스센터 3학기 62개 프로그램, AI 바이브 코딩 입문</li>
+      <li><a href="https://www.joongdo.co.kr/web/view.php?key=20260226010008479">중도일보</a> — 대전중장년지원센터 전 과정 ChatGPT 활용 포함 편성</li>
+      <li><a href="https://biz.heraldcorp.com/article/10814259">헤럴드경제</a> — 용인시 중장년 AI 활용 3개 과정(기초체험·입문·심화)</li>
+      <li><a href="https://www.sedaily.com/NewsView/2H0HN13ZN2">서울경제</a> — KMA 한국능률협회 시니어 공개교육 시리즈</li>
+      <li><a href="https://www.xn--2z1bw8k1pjz5ccumkb.kr/main.do">과기정통부 AI디지털배움터</a> — 전국 배움터 운영, 노노(老老)교육 보조강사 제도</li>
+      <li><a href="https://www.sbsart.com/class/ai-plus/ai/ai-senior.asp">SBS아카데미AIX학원</a> — 민간 국비지원 시니어 AI 과정 분량·도구 스택</li>
+      <li><a href="https://github.com/anthropics/skills">anthropics/skills</a> — Claude 공식 Agent Skills 저장소</li>
+      <li><a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview">Claude Platform Docs</a> — Agent Skills 개요 및 구조</li>
+    </ul>
+  </section>
+
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p><b>두 번째 명함</b> · 은퇴·은퇴예정 사무직 대상 AI 활용 실무 과정 강의계획서</p>
+    <p style="margin-top:6px">v1.0 · 2026년 8월 작성 · 국내 공공·민간 운영 사례 대조 검증본</p>
+  </div>
+</footer>
