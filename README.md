@@ -3,7 +3,8 @@
 은퇴·은퇴예정 **사무직**을 대상으로 한 12주 AI 활용 실무 과정 강의계획서입니다.
 전문 개발자 양성이 아니라, **"만들어 본 사람"을 배출하는 것**을 목표로 설계했습니다.
 
-📄 **[강의계획서 보기 →](https://heekeunlee.github.io/for_senior/)**
+📄 **[강의계획서 보기 →](https://heekeunlee.github.io/for_senior/)** — 전체 문서, 삽화 12종
+🎤 **[발표용 키노트 →](https://heekeunlee.github.io/for_senior/deck/)** — 29장, 화살표 키로 이동
 
 ---
 
@@ -62,13 +63,27 @@
 ## 저장소 구성
 
 ```
-index.html          배포되는 강의계획서 (자동 생성 — 직접 수정하지 말 것)
-src/syllabus.html   ← 실제 원본. 내용 수정은 여기서
-build.sh            src → index.html 빌드
+index.html          강의계획서        (자동 생성 — 직접 수정하지 말 것)
+deck/index.html     발표용 키노트     (자동 생성 — 직접 수정하지 말 것)
+src/syllabus.html   ← 강의계획서 원본
+src/deck.html       ← 키노트 원본
+build.sh            src/*.html → 배포 페이지 2종 빌드
 docs/
   benchmark.md      국내 운영 사례 조사 결과
   curriculum.md     12주 커리큘럼 텍스트판
 ```
+
+### 키노트 조작
+
+| 키 | 동작 |
+|---|---|
+| `←` `→` `Space` | 이전 / 다음 |
+| `O` | 슬라이드 목차 |
+| `F` | 전체화면 |
+| `Home` `End` | 처음 / 마지막 |
+
+화면 오른쪽을 클릭하면 다음, 왼쪽을 클릭하면 이전으로 갑니다. 모바일에서는 좌우 스와이프.
+주소 끝의 `#12` 처럼 슬라이드 번호를 붙이면 그 장으로 바로 열립니다.
 
 ### 수정하는 법
 

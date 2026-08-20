@@ -1,0 +1,415 @@
+<title>두 번째 명함 키노트</title>
+<style>
+:root{
+  --ink:#FFFFFF; --dim:#8E8E93; --faint:#48484A;
+  --bg:#000000; --amber:#E8A33D; --crimson:#FF6B5A;
+  --f:"Pretendard","Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",-apple-system,BlinkMacSystemFont,sans-serif;
+}
+*{box-sizing:border-box; margin:0; padding:0}
+html,body{height:100%; overflow:hidden}
+body{
+  background:var(--bg); color:var(--ink); font-family:var(--f);
+  -webkit-font-smoothing:antialiased; word-break:keep-all;
+  cursor:default;
+}
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:2;
+  background:radial-gradient(ellipse 90% 65% at 50% -10%, rgba(255,255,255,.07), transparent 65%);
+}
+.slide{
+  position:fixed; inset:0; display:grid; place-items:center;
+  padding:6vh 7vw; text-align:center; background:var(--bg);
+  opacity:0; pointer-events:none; z-index:1;
+  transition:opacity .42s ease;
+}
+.slide.on{opacity:1; pointer-events:auto; z-index:3}
+.slide.inv{background:#FFFFFF; color:#000000}
+.slide.inv .dim{color:#6E6E73}
+.c{display:flex; flex-direction:column; gap:clamp(14px,2.4vh,30px); align-items:center; max-width:1500px; width:100%}
+.c.left{align-items:flex-start; text-align:left}
+
+.mega{font-size:clamp(2.9rem,10.5vw,10.5rem); font-weight:200; letter-spacing:-.045em; line-height:.98}
+.big{font-size:clamp(2rem,6.2vw,5.6rem); font-weight:250; letter-spacing:-.035em; line-height:1.1}
+.mid{font-size:clamp(1.25rem,3.4vw,2.7rem); font-weight:300; letter-spacing:-.02em; line-height:1.35}
+.sm{font-size:clamp(.95rem,1.7vw,1.35rem); font-weight:400; letter-spacing:.01em; line-height:1.6}
+.tag{font-size:clamp(.7rem,1.1vw,.85rem); font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--dim)}
+.dim{color:var(--dim)} .amber{color:var(--amber)} .b{font-weight:600}
+.thin{font-weight:150}
+
+.slide.on .c > *{animation:rise .62s cubic-bezier(.2,.7,.25,1) backwards}
+.slide.on .c > *:nth-child(1){animation-delay:.06s}
+.slide.on .c > *:nth-child(2){animation-delay:.16s}
+.slide.on .c > *:nth-child(3){animation-delay:.26s}
+.slide.on .c > *:nth-child(4){animation-delay:.36s}
+.slide.on .c > *:nth-child(5){animation-delay:.46s}
+@keyframes rise{from{opacity:0; transform:translateY(22px)} to{opacity:1; transform:none}}
+
+.rule{width:64px; height:2px; background:var(--amber); border:0}
+.three{display:flex; gap:clamp(28px,6vw,96px); flex-wrap:wrap; justify-content:center; align-items:flex-start}
+.three div{display:flex; flex-direction:column; gap:10px; align-items:center}
+.num{font-size:clamp(2.4rem,7vw,6rem); font-weight:200; letter-spacing:-.04em; line-height:1; color:var(--amber)}
+.numlab{font-size:clamp(.85rem,1.5vw,1.15rem); color:var(--dim); font-weight:400}
+.orgs{display:flex; flex-wrap:wrap; gap:10px 14px; justify-content:center; max-width:1100px}
+.orgs span{font-size:clamp(.9rem,1.9vw,1.45rem); font-weight:300; color:var(--dim); padding:6px 16px; border:1px solid var(--faint); border-radius:99px}
+.quote{font-size:clamp(1.5rem,4.6vw,3.6rem); font-weight:250; letter-spacing:-.03em; line-height:1.35}
+figure.chart{width:min(1100px,92vw); display:flex; flex-direction:column; gap:14px}
+figure.chart svg{width:100%; height:auto; display:block}
+
+/* HUD */
+.hud{position:fixed; inset:auto 0 0 0; z-index:9; pointer-events:none}
+.bar{height:2px; background:var(--amber); width:0; transition:width .42s ease}
+.count{position:fixed; right:clamp(16px,2.6vw,34px); bottom:clamp(14px,2.4vh,26px); z-index:9;
+  font-size:.78rem; letter-spacing:.14em; color:var(--faint); font-variant-numeric:tabular-nums; pointer-events:none}
+.slide.inv ~ .count{color:#C7C7CC}
+.hint{position:fixed; left:50%; transform:translateX(-50%); bottom:clamp(14px,2.4vh,26px); z-index:9;
+  font-size:.75rem; letter-spacing:.14em; color:var(--faint); transition:opacity .5s}
+.hint.gone{opacity:0}
+.idx{position:fixed; inset:0; z-index:20; background:rgba(0,0,0,.94); display:none;
+  padding:5vh 5vw; overflow-y:auto}
+.idx.open{display:block}
+.idx h2{font-size:.78rem; letter-spacing:.22em; text-transform:uppercase; color:var(--dim); font-weight:600; margin-bottom:22px}
+.idx ol{list-style:none; display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:4px}
+.idx button{
+  all:unset; cursor:pointer; display:flex; gap:12px; align-items:baseline; width:100%;
+  padding:9px 12px; border-radius:4px; color:var(--dim); font-size:.92rem; font-family:var(--f);
+}
+.idx button:hover,.idx button:focus-visible{background:rgba(255,255,255,.08); color:var(--ink)}
+.idx button b{color:var(--faint); font-variant-numeric:tabular-nums; font-weight:400; font-size:.78rem; min-width:22px}
+.idx button[aria-current="true"]{color:var(--amber)}
+:focus-visible{outline:2px solid var(--amber); outline-offset:3px}
+@media (prefers-reduced-motion:reduce){
+  .slide{transition:none} .slide.on .c > *{animation:none} .bar{transition:none}
+}
+</style>
+
+<main class="deck">
+
+<section class="slide" data-label="표지">
+  <div class="c">
+    <p class="tag">은퇴·은퇴예정 사무직을 위한 AI 과정</p>
+    <h1 class="mega">두 번째 명함</h1>
+    <p class="sm dim">12주 · 24시간</p>
+  </div>
+</section>
+
+<section class="slide" data-label="명함이 없어집니다">
+  <div class="c">
+    <p class="mid dim">퇴직하면</p>
+    <p class="mega">명함이 없어집니다</p>
+  </div>
+</section>
+
+<section class="slide" data-label="경험은 그대로">
+  <div class="c">
+    <p class="big">경험은 그대로입니다.</p>
+  </div>
+</section>
+
+<section class="slide" data-label="그릇이 사라졌다">
+  <div class="c">
+    <p class="big">담을 <span class="amber">그릇</span>이<br>사라졌을 뿐입니다.</p>
+  </div>
+</section>
+
+<section class="slide" data-label="기존 질문">
+  <div class="c">
+    <p class="tag">기존 교육은 이렇게 묻습니다</p>
+    <p class="big dim">"AI를 어떻게 쓰는가"</p>
+  </div>
+</section>
+
+<section class="slide" data-label="우리 질문">
+  <div class="c">
+    <p class="tag">우리는 이렇게 묻습니다</p>
+    <p class="big">"무엇을 <span class="amber">만들</span> 것인가"</p>
+  </div>
+</section>
+
+<section class="slide" data-label="12주 뒤">
+  <div class="c">
+    <p class="mid dim">12주 뒤,</p>
+    <p class="big">한 사람이 이것을 갖고 나갑니다.</p>
+  </div>
+</section>
+
+<section class="slide" data-label="앱 하나">
+  <div class="c">
+    <p class="tag">하나</p>
+    <p class="mega">앱 하나</p>
+    <p class="sm dim">복약 알리미 · 가계부 · 연금 시뮬레이터</p>
+  </div>
+</section>
+
+<section class="slide" data-label="대시보드 하나">
+  <div class="c">
+    <p class="tag">둘</p>
+    <p class="mega">대시보드 하나</p>
+    <p class="sm dim">내 지출 · 내 건강 · 내 자산</p>
+  </div>
+</section>
+
+<section class="slide" data-label="링크 하나">
+  <div class="c">
+    <p class="tag">셋</p>
+    <p class="mega">링크 하나</p>
+    <p class="sm dim">가족과 지인에게 보낼 수 있는</p>
+  </div>
+</section>
+
+<section class="slide" data-label="세 개가 아닙니다">
+  <div class="c">
+    <p class="mid dim">앱 하나. 대시보드 하나. 링크 하나.</p>
+    <p class="big">이것은 세 개의 결과물이 아닙니다.</p>
+  </div>
+</section>
+
+<section class="slide inv" data-label="하나의 명함">
+  <div class="c">
+    <p class="mega">하나의 명함입니다.</p>
+  </div>
+</section>
+
+<section class="slide" data-label="숫자">
+  <div class="c">
+    <div class="three">
+      <div><span class="num">12</span><span class="numlab">주 · 주 1회</span></div>
+      <div><span class="num">24</span><span class="numlab">시간 · 회당 2h</span></div>
+      <div><span class="num">20</span><span class="numlab">명 정원</span></div>
+      <div><span class="num">4</span><span class="numlab">선택 트랙</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-label="조사했습니다">
+  <div class="c">
+    <p class="big">먼저, 국내를 전부 조사했습니다.</p>
+    <p class="sm dim">정부 · 지자체 · 공공재단 · 민간 · 2026년 8월 기준</p>
+  </div>
+</section>
+
+<section class="slide" data-label="7개 기관">
+  <div class="c">
+    <p class="mega thin">7<span style="font-size:.35em; font-weight:300; letter-spacing:0"> 개 기관</span></p>
+    <div class="orgs">
+      <span>서울시50플러스재단</span><span>서대문50플러스센터</span><span>대전중장년지원센터</span>
+      <span>용인시</span><span>한국능률협회</span><span>과기정통부 AI디지털배움터</span><span>민간 국비지원 학원</span>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-label="이미 하고 있는 것">
+  <div class="c">
+    <p class="tag">이미 하고 있었습니다</p>
+    <p class="mid">실습 중심 &nbsp;·&nbsp; 말로 앱 만들기 &nbsp;·&nbsp; 발표회로 마무리</p>
+    <hr class="rule">
+    <p class="big">우리 계획은 틀리지 않았습니다.</p>
+  </div>
+</section>
+
+<section class="slide" data-label="아무도 안 하는 것">
+  <div class="c">
+    <p class="tag">그런데 아무도 하지 않는 것이 둘</p>
+    <p class="big"><span class="amber">개인 실데이터</span><br><span class="amber">트랙 분기</span></p>
+    <p class="sm dim">국내는 예제 데이터를 쓰고, 트랙은 과정 자체를 분리 개설합니다</p>
+  </div>
+</section>
+
+<section class="slide" data-label="문제">
+  <div class="c">
+    <p class="mid dim">그런데 문제가 하나 있습니다.</p>
+    <p class="mega">사람들이<br>그만둡니다.</p>
+  </div>
+</section>
+
+<section class="slide" data-label="이탈 곡선">
+  <div class="c">
+    <p class="tag">주차별 이탈 위험</p>
+    <figure class="chart">
+      <svg viewBox="0 0 1000 300" role="img" aria-label="주차별 이탈 위험 추정 곡선. 1주, 5주, 7주, 10주에 봉우리.">
+        <path d="M40,110 L127,190 L214,212 L301,201 L388,86 L475,201 L562,121 L649,179 L736,212 L823,166 L910,224 L997,257 L997,270 L40,270 Z" fill="#FF6B5A" opacity=".14"/>
+        <path d="M40,110 L127,190 L214,212 L301,201 L388,86 L475,201 L562,121 L649,179 L736,212 L823,166 L910,224 L997,257"
+              fill="none" stroke="#FF6B5A" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
+        <g fill="#FF6B5A"><circle cx="40" cy="110" r="8"/><circle cx="388" cy="86" r="8"/><circle cx="562" cy="121" r="8"/><circle cx="823" cy="166" r="8"/></g>
+        <g font-family="var(--f)" font-size="19" font-weight="500" fill="#FFFFFF">
+          <text x="56" y="98">계정 가입</text>
+          <text x="388" y="66" text-anchor="middle">첫 에러</text>
+          <text x="562" y="101" text-anchor="middle">데이터 준비</text>
+          <text x="823" y="146" text-anchor="middle">트랙 선택</text>
+        </g>
+        <g font-family="var(--f)" font-size="15" fill="#8E8E93">
+          <text x="40" y="292">1주</text><text x="388" y="292" text-anchor="middle">5주</text>
+          <text x="562" y="292" text-anchor="middle">7주</text><text x="823" y="292" text-anchor="middle">10주</text>
+          <text x="997" y="292" text-anchor="end">12주</text>
+        </g>
+      </svg>
+      <figcaption class="sm dim" style="text-align:left">
+        <span style="border:1px solid #FF6B5A; color:#FF6B5A; border-radius:99px; padding:2px 10px; font-size:.78em; font-weight:600; margin-right:10px">추정</span>
+        실측 데이터가 아닙니다. 국내 7개 기관 중 중도이탈률을 공개하는 곳은 한 곳도 없습니다. 봉우리의 순서와 상대적 크기만 보십시오.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="slide" data-label="네 번의 고비">
+  <div class="c">
+    <p class="mega">네 번의 고비.</p>
+    <p class="big dim">전부 예측 가능합니다.</p>
+  </div>
+</section>
+
+<section class="slide" data-label="세 가지를 금지">
+  <div class="c">
+    <p class="big">그래서 세 가지를<br><span class="amber">못 하게</span> 했습니다.</p>
+  </div>
+</section>
+
+<section class="slide" data-label="설치 금지">
+  <div class="c">
+    <p class="tag">하나</p>
+    <p class="mega">설치하지 않습니다</p>
+    <p class="sm dim">전 과정 브라우저에서. 계정은 개강 전에 미리 만듭니다.</p>
+  </div>
+</section>
+
+<section class="slide" data-label="타이핑 금지">
+  <div class="c">
+    <p class="tag">둘</p>
+    <p class="mega">타이핑하지 않습니다</p>
+    <p class="sm dim">코드는 보여주되 치지 않습니다. 오타 하나가 자존감을 무너뜨립니다.</p>
+  </div>
+</section>
+
+<section class="slide" data-label="에러를 가르친다">
+  <div class="c">
+    <p class="tag">셋</p>
+    <p class="mega">에러를 가르칩니다</p>
+    <p class="sm dim">5주차. 일부러 앱을 망가뜨린 뒤 AI에게 고쳐 달라고 시킵니다.</p>
+  </div>
+</section>
+
+<section class="slide inv" data-label="에러는">
+  <div class="c">
+    <p class="big">에러는 실패가 아니라</p>
+    <p class="mega">붙여넣고 물어보면<br>되는 것입니다.</p>
+  </div>
+</section>
+
+<section class="slide" data-label="12주차">
+  <div class="c">
+    <p class="tag">12주차</p>
+    <p class="mega">발표회</p>
+    <p class="sm dim">그 자리에서 가족에게 링크를 보내는 것까지가 커리큘럼입니다</p>
+  </div>
+</section>
+
+<section class="slide" data-label="딸에게">
+  <div class="c">
+    <p class="quote">"딸한테 보냈더니<br>놀라더라."</p>
+    <p class="sm dim">— 이 한 문장이 다음 기수를 채웁니다</p>
+  </div>
+</section>
+
+<section class="slide" data-label="One more thing">
+  <div class="c">
+    <p class="tag">One more thing</p>
+    <p class="mega">조교는<br><span class="amber">동년배</span>입니다.</p>
+    <p class="sm dim">서울시50플러스재단은 시니어 강사를 따로 뽑고, 과기정통부는 노노(老老)교육 제도를 운영합니다.<br>두 기관이 각자 같은 결론에 도달했습니다.</p>
+  </div>
+</section>
+
+<section class="slide" data-label="마무리">
+  <div class="c">
+    <h2 class="mega">두 번째 명함</h2>
+    <hr class="rule">
+    <p class="sm dim">강의계획서 전문 · heekeunlee.github.io/for_senior</p>
+  </div>
+</section>
+
+</main>
+
+<div class="hud"><div class="bar" id="bar"></div></div>
+<div class="count" id="count">01 / 29</div>
+<p class="hint" id="hint">← → 이동 &nbsp;·&nbsp; O 목차 &nbsp;·&nbsp; F 전체화면</p>
+<nav class="idx" id="idx" aria-label="슬라이드 목차" hidden><h2>목차</h2><ol id="idxlist"></ol></nav>
+
+<script>
+(function(){
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var bar = document.getElementById('bar'), count = document.getElementById('count');
+  var hint = document.getElementById('hint'), idx = document.getElementById('idx');
+  var list = document.getElementById('idxlist');
+  var i = 0, total = slides.length, touched = false;
+
+  function pad(n){ return (n < 10 ? '0' : '') + n; }
+
+  function show(n, push){
+    n = Math.max(0, Math.min(total - 1, n));
+    if (slides[i]) slides[i].classList.remove('on');
+    i = n;
+    slides[i].classList.add('on');
+    // 반전 슬라이드에서는 HUD 색을 뒤집는다
+    var inv = slides[i].classList.contains('inv');
+    count.style.color = inv ? '#8E8E93' : '';
+    hint.style.color  = inv ? '#8E8E93' : '';
+    count.textContent = pad(i + 1) + ' / ' + total;
+    bar.style.width = ((i + 1) / total * 100) + '%';
+    Array.prototype.forEach.call(list.children, function(li, k){
+      li.firstChild.setAttribute('aria-current', k === i ? 'true' : 'false');
+    });
+    if (push !== false) history.replaceState(null, '', '#' + (i + 1));
+    if (!touched && i > 0){ touched = true; hint.classList.add('gone'); }
+  }
+
+  // 목차 구성
+  slides.forEach(function(s, k){
+    var li = document.createElement('li');
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.innerHTML = '<b>' + pad(k + 1) + '</b><span></span>';
+    b.lastChild.textContent = s.dataset.label || ('슬라이드 ' + (k + 1));
+    b.addEventListener('click', function(){ closeIdx(); show(k); });
+    li.appendChild(b); list.appendChild(li);
+  });
+
+  function openIdx(){ idx.hidden = false; idx.classList.add('open'); var f = list.querySelector('button'); if (f) f.focus(); }
+  function closeIdx(){ idx.classList.remove('open'); idx.hidden = true; }
+  function toggleIdx(){ idx.classList.contains('open') ? closeIdx() : openIdx(); }
+
+  function fullscreen(){
+    if (document.fullscreenElement) { document.exitFullscreen(); }
+    else if (document.documentElement.requestFullscreen) { document.documentElement.requestFullscreen(); }
+  }
+
+  document.addEventListener('keydown', function(e){
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var k = e.key;
+    if (idx.classList.contains('open') && (k === 'Escape' || k === 'o' || k === 'O')){ e.preventDefault(); closeIdx(); return; }
+    if (k === 'ArrowRight' || k === 'ArrowDown' || k === ' ' || k === 'PageDown' || k === 'Enter'){ e.preventDefault(); show(i + 1); }
+    else if (k === 'ArrowLeft' || k === 'ArrowUp' || k === 'PageUp' || k === 'Backspace'){ e.preventDefault(); show(i - 1); }
+    else if (k === 'Home'){ e.preventDefault(); show(0); }
+    else if (k === 'End'){ e.preventDefault(); show(total - 1); }
+    else if (k === 'o' || k === 'O'){ e.preventDefault(); toggleIdx(); }
+    else if (k === 'f' || k === 'F'){ e.preventDefault(); fullscreen(); }
+  });
+
+  // 클릭: 화면 오른쪽 다음, 왼쪽 이전
+  document.addEventListener('click', function(e){
+    if (idx.contains(e.target) || e.target.closest('a, button')) return;
+    show(e.clientX > window.innerWidth * 0.32 ? i + 1 : i - 1);
+  });
+
+  // 터치 스와이프
+  var x0 = null, y0 = null;
+  document.addEventListener('touchstart', function(e){ x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, {passive:true});
+  document.addEventListener('touchend', function(e){
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) show(dx < 0 ? i + 1 : i - 1);
+    x0 = y0 = null;
+  }, {passive:true});
+
+  var start = parseInt((location.hash || '').replace('#',''), 10);
+  show(isNaN(start) ? 0 : start - 1, false);
+  count.textContent = pad(i + 1) + ' / ' + total;
+})();
+</script>
