@@ -55,6 +55,19 @@ body::before{
 figure.chart{width:min(1100px,92vw); display:flex; flex-direction:column; gap:14px}
 figure.chart svg{width:100%; height:auto; display:block}
 
+.cols{display:flex; gap:clamp(36px,9vw,130px); flex-wrap:wrap; justify-content:center; text-align:left}
+.cols > div{display:flex; flex-direction:column; gap:clamp(10px,1.8vh,18px)}
+.tag.crim{color:var(--crimson)} .tag.amb{color:var(--amber)}
+.list{font-size:clamp(1.05rem,2.7vw,2.05rem); font-weight:250; line-height:1.65; letter-spacing:-.02em}
+.list.off{color:var(--dim)}
+.ask{display:flex; flex-direction:column; gap:clamp(10px,2vh,22px); text-align:left; width:100%; max-width:1040px}
+.ask .row{display:flex; gap:clamp(16px,2.6vw,36px); align-items:baseline; border-top:1px solid #2C2C2E; padding-top:clamp(11px,1.9vh,20px)}
+.ask .k{color:var(--amber); font-weight:200; font-size:clamp(1.5rem,3.8vw,2.9rem); line-height:1; letter-spacing:-.04em; flex:none}
+.ask .v{font-size:clamp(1.02rem,2.4vw,1.85rem); font-weight:250; letter-spacing:-.02em; line-height:1.35}
+.ask .v em{display:block; font-style:normal; font-size:clamp(.83rem,1.4vw,1.05rem); color:var(--dim); font-weight:400; margin-top:7px; letter-spacing:0}
+.slide.on .c > *:nth-child(6){animation-delay:.56s}
+.slide.on .c > *:nth-child(7){animation-delay:.66s}
+
 /* HUD */
 .hud{position:fixed; inset:auto 0 0 0; z-index:9; pointer-events:none}
 .bar{height:2px; background:var(--amber); width:0; transition:width .42s ease}
@@ -108,6 +121,54 @@ figure.chart svg{width:100%; height:auto; display:block}
 <section class="slide" data-label="그릇이 사라졌다">
   <div class="c">
     <p class="big">담을 <span class="amber">그릇</span>이<br>사라졌을 뿐입니다.</p>
+  </div>
+</section>
+
+<section class="slide" data-label="컴맹이 아닙니다">
+  <div class="c">
+    <p class="tag">먼저, 누가 오는가</p>
+    <p class="mega">컴맹이 아닙니다</p>
+    <p class="sm dim">30년간 엑셀과 문서로 먹고산 사람들입니다</p>
+  </div>
+</section>
+
+<section class="slide" data-label="프로필">
+  <div class="c">
+    <p class="tag">이미 가진 것 / 채워야 할 것</p>
+    <figure class="chart">
+      <svg viewBox="0 0 1000 330" role="img" aria-label="대상 프로필. 문서·엑셀·검색 역량은 높고 생성형 AI만 비어 있으며 코드 작성은 목표가 아님.">
+        <g font-family="var(--f)" font-size="22" font-weight="300">
+          <g fill="#FFFFFF">
+            <text x="285" y="55" text-anchor="end">문서 · 이메일 · 파일관리</text>
+            <text x="285" y="110" text-anchor="end">엑셀 · 스프레드시트</text>
+            <text x="285" y="165" text-anchor="end">웹 검색 · 자료조사</text>
+          </g>
+          <text x="285" y="220" text-anchor="end" fill="#E8A33D" font-weight="500">생성형 AI 활용</text>
+          <text x="285" y="275" text-anchor="end" fill="#8E8E93">코드 직접 작성</text>
+        </g>
+        <g>
+          <rect x="300" y="34" width="576" height="26" rx="3" fill="#FFFFFF" opacity=".32"/>
+          <rect x="300" y="89" width="544" height="26" rx="3" fill="#FFFFFF" opacity=".32"/>
+          <rect x="300" y="144" width="416" height="26" rx="3" fill="#FFFFFF" opacity=".32"/>
+          <rect x="300" y="199" width="38" height="26" rx="3" fill="#E8A33D"/>
+          <rect x="300" y="254" width="13" height="26" rx="3" fill="#48484A"/>
+          <rect x="325" y="254" width="150" height="26" rx="3" fill="none" stroke="#48484A" stroke-width="1.5" stroke-dasharray="5 4"/>
+          <text x="400" y="272" text-anchor="middle" font-family="var(--f)" font-size="17" fill="#8E8E93">목표 아님</text>
+        </g>
+        <text x="356" y="220" font-family="var(--f)" font-size="22" font-weight="500" fill="#E8A33D">← 12주가 채우는 칸은 여기 하나뿐</text>
+        <line x1="300" y1="300" x2="940" y2="300" stroke="#2C2C2E" stroke-width="1"/>
+        <g font-family="var(--f)" font-size="15" fill="#48484A">
+          <text x="300" y="322">없음</text><text x="940" y="322" text-anchor="end">능숙</text>
+        </g>
+      </svg>
+    </figure>
+  </div>
+</section>
+
+<section class="slide" data-label="강사보다 잘합니다">
+  <div class="c">
+    <p class="big">강사보다 엑셀을 잘하는<br>수강생이 반드시 있습니다.</p>
+    <p class="mid amber">그게 이 설계의 전제입니다.</p>
   </div>
 </section>
 
@@ -177,6 +238,107 @@ figure.chart svg{width:100%; height:auto; display:block}
       <div><span class="num">20</span><span class="numlab">명 정원</span></div>
       <div><span class="num">4</span><span class="numlab">선택 트랙</span></div>
     </div>
+  </div>
+</section>
+
+<section class="slide" data-label="계단">
+  <div class="c">
+    <p class="tag">12주를 이렇게 씁니다</p>
+    <figure class="chart">
+      <svg viewBox="0 0 1000 340" role="img" aria-label="4단계 성취 누적 계단. 즉시 효용, 앱 제작, 대시보드, 트랙 프로젝트 순으로 상승.">
+        <g>
+          <rect x="20" y="250" width="235" height="50" fill="#FFFFFF" opacity=".07" rx="3"/>
+          <rect x="265" y="195" width="235" height="105" fill="#FFFFFF" opacity=".11" rx="3"/>
+          <rect x="510" y="140" width="235" height="160" fill="#FFFFFF" opacity=".15" rx="3"/>
+          <rect x="755" y="85" width="235" height="215" fill="#FFFFFF" opacity=".19" rx="3"/>
+          <path d="M20,250 H255 M265,195 H500 M510,140 H745 M755,85 H990" stroke="#E8A33D" stroke-width="3" fill="none"/>
+        </g>
+        <g font-family="var(--f)" fill="#FFFFFF" font-size="21" font-weight="500">
+          <text x="38" y="276">1단계 · 1–3주</text><text x="283" y="221">2단계 · 4–6주</text>
+          <text x="528" y="166">3단계 · 7–9주</text><text x="773" y="111">4단계 · 10–12주</text>
+        </g>
+        <g font-family="var(--f)" fill="#8E8E93" font-size="17">
+          <text x="38" y="294">즉시 효용</text><text x="283" y="239">말로 앱 만들기</text>
+          <text x="528" y="184">데이터와 대시보드</text><text x="773" y="129">트랙별 프로젝트</text>
+        </g>
+        <g font-family="var(--f)" fill="#E8A33D" font-size="17" font-style="italic">
+          <text x="38" y="330">"내 엑셀 문제가 풀렸다"</text><text x="283" y="330">"내 앱이 생겼다"</text>
+          <text x="528" y="330">"내 데이터가 그림이 됐다"</text><text x="773" y="330">"내 이름의 결과물"</text>
+        </g>
+      </svg>
+    </figure>
+    <p class="sm dim">각 단계는 앞 단계의 결과물을 재료로 씁니다. 결석하면 다음 주에 쓸 재료가 없어집니다.</p>
+  </div>
+</section>
+
+<section class="slide" data-label="1단계">
+  <div class="c">
+    <p class="tag">1단계 · 1–3주</p>
+    <p class="mega">즉시 효용</p>
+    <p class="sm dim">엑셀 실무 · 긴 문서 다루기 · 이미지 · 디지털 안전</p>
+  </div>
+</section>
+
+<section class="slide" data-label="1주차 한 문장">
+  <div class="c">
+    <p class="tag">1주차, 강사의 첫 마디</p>
+    <p class="quote">"지난주에 막혔던<br>엑셀 문제, 세 개만<br>가져오세요."</p>
+    <p class="sm dim">이 한 문장이 12주 전체의 신뢰를 결정합니다</p>
+  </div>
+</section>
+
+<section class="slide" data-label="2단계">
+  <div class="c">
+    <p class="tag">2단계 · 4–6주</p>
+    <p class="mega">말로 앱 만들기</p>
+    <p class="sm dim">복약 알리미 · 가계부 · 연금 시뮬레이터</p>
+  </div>
+</section>
+
+<section class="slide" data-label="3단계">
+  <div class="c">
+    <p class="tag">3단계 · 7–9주</p>
+    <p class="mega">내 데이터로<br>대시보드</p>
+    <p class="sm dim">카드 내역 · 검진 결과 · 회비 장부 — 예제 데이터가 아닙니다</p>
+  </div>
+</section>
+
+<section class="slide" data-label="4단계">
+  <div class="c">
+    <p class="tag">4단계 · 10–12주</p>
+    <p class="mega">각자의 길로</p>
+    <p class="sm dim">동기가 다른 사람을 하나의 결과물로 묶으면 만족도가 떨어집니다</p>
+  </div>
+</section>
+
+<section class="slide" data-label="트랙 넷">
+  <div class="c">
+    <figure class="chart">
+      <svg viewBox="0 0 1000 300" role="img" aria-label="10주차 트랙 분기. 제2커리어, 자산관리, 기록·유산, 모임·창업 네 갈래.">
+        <g fill="none" stroke-width="3" stroke-linecap="round">
+          <path d="M40,165 L300,165" stroke="#FFFFFF" stroke-width="9" opacity=".3"/>
+          <path d="M300,165 C390,165 400,50 500,50" stroke="#E8A33D"/>
+          <path d="M300,165 C390,165 400,128 500,128" stroke="#FFFFFF" opacity=".75"/>
+          <path d="M300,165 C390,165 400,203 500,203" stroke="#FFFFFF" opacity=".55"/>
+          <path d="M300,165 C390,165 400,275 500,275" stroke="#FFFFFF" opacity=".4"/>
+        </g>
+        <circle cx="300" cy="165" r="8" fill="#000" stroke="#FFFFFF" stroke-width="3"/>
+        <g font-family="var(--f)">
+          <text x="40" y="150" font-size="21" font-weight="500" fill="#FFFFFF">1–9주 공통</text>
+          <text x="300" y="138" font-size="15" fill="#8E8E93" text-anchor="middle">9주차 상담</text>
+          <g font-size="23" font-weight="500" fill="#FFFFFF">
+            <text x="522" y="45">제2커리어</text><text x="522" y="123">자산관리</text>
+            <text x="522" y="198">기록·유산</text><text x="522" y="270">모임·창업</text>
+          </g>
+          <g font-size="17" fill="#8E8E93">
+            <text x="522" y="70">컨설팅 소개 페이지 · 경력기술서</text>
+            <text x="522" y="148">연금·지출·자산 통합 대시보드</text>
+            <text x="522" y="223">AI 인터뷰 자서전 · 가족 아카이브</text>
+            <text x="522" y="295">총무 시스템 · 소상공인 매출 대시보드</text>
+          </g>
+        </g>
+      </svg>
+    </figure>
   </div>
 </section>
 
@@ -294,6 +456,38 @@ figure.chart svg{width:100%; height:auto; display:block}
   </div>
 </section>
 
+<section class="slide" data-label="개인 데이터를 씁니다">
+  <div class="c">
+    <p class="mid dim">그런데 이 과정은</p>
+    <p class="mega">진짜 개인 데이터를<br>씁니다.</p>
+    <p class="sm dim">카드 내역 · 건강검진 결과 · 회비 장부</p>
+  </div>
+</section>
+
+<section class="slide" data-label="데이터 규칙">
+  <div class="c">
+    <p class="tag">7주차 시작 전, 전원에게 먼저 고지합니다</p>
+    <div class="cols">
+      <div>
+        <p class="tag crim">올리지 않습니다</p>
+        <p class="list off">주민등록번호<br>계좌·카드번호 전체<br>비밀번호<br>타인의 개인정보</p>
+      </div>
+      <div>
+        <p class="tag amb">올려도 됩니다</p>
+        <p class="list">금액과 날짜<br>항목명<br>검진 수치<br>이니셜로 바꾼 명부</p>
+      </div>
+    </div>
+    <p class="sm dim">마스킹 작업은 조교와 함께, 수업 시간 안에서 합니다</p>
+  </div>
+</section>
+
+<section class="slide" data-label="딥페이크">
+  <div class="c">
+    <p class="mega">딥페이크는<br>이분들에게 <span class="amber">현실</span>입니다.</p>
+    <p class="sm dim">3주차에 목소리 복제를 직접 보여주고, 그 자리에서 대응법을 가르칩니다</p>
+  </div>
+</section>
+
 <section class="slide" data-label="12주차">
   <div class="c">
     <p class="tag">12주차</p>
@@ -317,6 +511,72 @@ figure.chart svg{width:100%; height:auto; display:block}
   </div>
 </section>
 
+<section class="slide" data-label="필요한 것">
+  <div class="c">
+    <p class="tag">한 기수를 열려면</p>
+    <div class="three">
+      <div><span class="num">20</span><span class="numlab">수강생</span></div>
+      <div><span class="num">2</span><span class="numlab">조교</span></div>
+      <div><span class="num">1</span><span class="numlab">강의실</span></div>
+      <div><span class="num">12</span><span class="numlab">주</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-label="조교가 예산의 핵심">
+  <div class="c">
+    <p class="big">예산에서 조교 2명이<br>가장 큰 항목입니다.</p>
+    <p class="mid amber">여기서 아끼면 나머지가 전부 무너집니다.</p>
+  </div>
+</section>
+
+<section class="slide" data-label="성공 측정">
+  <div class="c">
+    <p class="tag">성공은 이렇게 잽니다</p>
+    <div class="three">
+      <div><span class="num">80%</span><span class="numlab">수료율<br>12회 중 8회 출석</span></div>
+      <div><span class="num">100%</span><span class="numlab">결과물 제출<br>1인 1건, 발표회 참여</span></div>
+      <div><span class="num">0</span><span class="numlab">시험 · 석차 · 점수</span></div>
+    </div>
+    <p class="sm dim">시험 스트레스는 이 대상층에서 가장 확실한 이탈 요인입니다. 그래서 아예 만들지 않았습니다.</p>
+  </div>
+</section>
+
+<section class="slide" data-label="8주로 줄인다면">
+  <div class="c">
+    <p class="tag">예산이 8주뿐이라면</p>
+    <div class="cols">
+      <div>
+        <p class="tag">줄여도 됩니다</p>
+        <p class="list off">대시보드 2주로 압축<br>프로젝트 1주 + 발표 1주</p>
+      </div>
+      <div>
+        <p class="tag crim">절대 못 뺍니다</p>
+        <p class="list">1주차 엑셀<br>5주차 에러 대응<br>마지막 발표회</p>
+      </div>
+    </div>
+    <p class="sm dim">앞은 신뢰를, 가운데는 완주율을, 뒤는 다음 기수를 결정합니다</p>
+  </div>
+</section>
+
+<section class="slide" data-label="결정해 주실 것">
+  <div class="c">
+    <p class="tag">결정해 주셔야 할 것 셋</p>
+    <div class="ask">
+      <div class="row"><span class="k">1</span><span class="v">12주로 갈 것인가, 8주로 갈 것인가<em>국내 공공과정 표준은 12~18시간입니다. 24시간은 최장급입니다.</em></span></div>
+      <div class="row"><span class="k">2</span><span class="v">조교를 동년배에서 뽑을 수 있는가<em>서울시50플러스재단과 과기정통부가 각자 같은 결론에 도달했습니다.</em></span></div>
+      <div class="row"><span class="k">3</span><span class="v">도구 계정 비용을 수강료에 넣을 것인가<em>4~9주차에 사용량 한도가 반드시 걸립니다.</em></span></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide inv" data-label="첫 기수">
+  <div class="c">
+    <p class="mid">그 셋이 정해지면</p>
+    <p class="mega">첫 기수를<br>열 수 있습니다.</p>
+  </div>
+</section>
+
 <section class="slide" data-label="마무리">
   <div class="c">
     <h2 class="mega">두 번째 명함</h2>
@@ -328,7 +588,7 @@ figure.chart svg{width:100%; height:auto; display:block}
 </main>
 
 <div class="hud"><div class="bar" id="bar"></div></div>
-<div class="count" id="count">01 / 29</div>
+<div class="count" id="count">01 / 48</div>
 <p class="hint" id="hint">← → 이동 &nbsp;·&nbsp; O 목차 &nbsp;·&nbsp; F 전체화면</p>
 <nav class="idx" id="idx" aria-label="슬라이드 목차" hidden><h2>목차</h2><ol id="idxlist"></ol></nav>
 
