@@ -143,13 +143,24 @@ td.wk{font-variant-numeric:tabular-nums; font-weight:700; color:var(--indigo); w
 /* ---------- figures ---------- */
 figure{margin:0; display:flex; flex-direction:column; gap:10px}
 .figbox{background:var(--surface); border:1px solid var(--line); border-radius:3px; padding:22px 18px; overflow-x:auto; box-shadow:var(--shadow)}
-.figbox svg{display:block; min-width:600px; width:100%; height:auto}
+.figbox > svg{display:block; min-width:600px; width:100%; height:auto}
 figcaption{font-size:.83rem; color:var(--ink-mute); line-height:1.6}
 figcaption b{color:var(--ink-soft)}
 .svg-label{font-family:var(--font-body); font-size:11px; fill:var(--ink-mute)}
 .svg-label-b{font-family:var(--font-body); font-size:12px; font-weight:700; fill:var(--ink)}
 .svg-title{font-family:var(--font-display); font-size:14px; font-weight:700; fill:var(--ink)}
 .svg-num{font-family:var(--font-body); font-size:10px; fill:var(--ink-mute)}
+
+/* 근거 등급 표시 — 실측(공개자료 확인) vs 추정(설계자 판단) */
+.badge{display:inline-flex; align-items:center; gap:5px; font-size:.7rem; font-weight:700; letter-spacing:.04em; padding:2px 9px; border-radius:99px; border:1px solid currentColor; white-space:nowrap; font-family:var(--font-body)}
+.badge.meas{color:var(--celadon)} .badge.est{color:var(--crimson)}
+.figbox.est-box{border-color:var(--crimson)}
+.est-flag{display:flex; gap:11px; align-items:flex-start; margin:0 0 18px; padding:12px 15px; border-radius:3px; background:var(--surface-2); border-left:3px solid var(--crimson); font-size:.87rem; line-height:1.65; color:var(--ink-soft)}
+.est-flag b{color:var(--crimson)}
+.est-flag .ico{flex:none; width:20px; height:20px; margin-top:1px}
+.legend{display:flex; gap:14px 26px; flex-wrap:wrap; align-items:center; font-size:.86rem; color:var(--ink-soft); padding:15px 19px; background:var(--surface-2); border:1px solid var(--line); border-radius:3px}
+.legend .item{display:flex; gap:8px; align-items:center}
+figcaption .badge{margin-right:7px; vertical-align:1px}
 
 footer{border-top:1px solid var(--line); padding:36px 0 64px; font-size:.85rem; color:var(--ink-mute)}
 footer a{color:var(--ink-soft)}
@@ -214,6 +225,59 @@ footer a{color:var(--ink-soft)}
           <h3>운영 형태</h3>
           <p>주 1회 2시간 대면, 12주. 정원 20명, 조교 2명(수강생 10명당 1명). 전 과정 브라우저 기반 — 설치·터미널·개발환경 없음.</p>
         </div>
+      </div>
+
+
+      <figure>
+        <div class="figbox est-box">
+          <svg viewBox="0 0 720 252" role="img" aria-label="대상 프로필 막대그래프. 문서·이메일·파일관리와 엑셀 역량은 높고, 생성형 AI 활용 경험은 거의 없으며, 코드 작성은 목표가 아님.">
+            <text class="svg-title" x="0" y="14">대상 프로필 — 이미 가진 것과 채워야 할 것</text>
+            <text class="svg-label" x="0" y="32">이 과정은 디지털 기초가 아니라 단 하나의 공백만 겨냥합니다</text>
+            <g transform="translate(586,2)">
+              <rect x="0" y="0" width="134" height="19" rx="9.5" fill="none" stroke="var(--crimson)" stroke-width="1"/>
+              <text x="67" y="13.5" text-anchor="middle" class="svg-num" font-weight="700" style="fill:var(--crimson)">추정 · 설계 전제</text>
+            </g>
+
+            <rect x="178" y="152" width="474" height="30" fill="var(--ochre)" opacity=".10" rx="3"/>
+
+            <g>
+              <text class="svg-label" x="175" y="66" text-anchor="end">문서 · 이메일 · 파일관리</text>
+              <rect x="185" y="54" width="414" height="17" fill="var(--celadon)" opacity=".7" rx="2"/>
+              <text class="svg-num" x="607" y="66" style="fill:var(--celadon)">30년간 매일 쓰던 것</text>
+            </g>
+            <g>
+              <text class="svg-label" x="175" y="100" text-anchor="end">엑셀 · 스프레드시트</text>
+              <rect x="185" y="88" width="391" height="17" fill="var(--celadon)" opacity=".7" rx="2"/>
+              <text class="svg-num" x="584" y="100" style="fill:var(--celadon)">강사보다 잘할 수 있음</text>
+            </g>
+            <g>
+              <text class="svg-label" x="175" y="134" text-anchor="end">웹 검색 · 자료조사</text>
+              <rect x="185" y="122" width="299" height="17" fill="var(--celadon)" opacity=".45" rx="2"/>
+            </g>
+            <g>
+              <text class="svg-label-b" x="175" y="168" text-anchor="end" style="fill:var(--ochre)">생성형 AI 활용</text>
+              <rect x="185" y="156" width="28" height="17" fill="var(--ochre)" rx="2"/>
+              <text class="svg-label-b" x="223" y="168" style="fill:var(--ochre)">← 12주가 채우는 구간은 여기 하나뿐</text>
+            </g>
+            <g>
+              <text class="svg-label" x="175" y="202" text-anchor="end" style="fill:var(--ink-mute)">코드 직접 작성</text>
+              <rect x="185" y="190" width="9" height="17" fill="var(--ink-mute)" opacity=".4" rx="2"/>
+              <rect x="200" y="190" width="120" height="17" fill="none" stroke="var(--ink-mute)" stroke-width="1" stroke-dasharray="3 3" rx="2"/>
+              <text class="svg-num" x="260" y="202" text-anchor="middle" style="fill:var(--ink-mute)">목표 아님</text>
+            </g>
+
+            <line x1="185" y1="216" x2="652" y2="216" stroke="var(--line)" stroke-width="1"/>
+            <text class="svg-num" x="185" y="232" style="fill:var(--ink-mute)">없음</text>
+            <text class="svg-num" x="652" y="232" text-anchor="end" style="fill:var(--ink-mute)">능숙</text>
+          </svg>
+        </div>
+        <figcaption><span class="badge est">추정</span><b>설계의 출발점.</b> 이 프로필은 조사가 아니라 <b>가정</b>입니다. 실제 모집 후 사전 설문으로 반드시 검증하십시오 — 특히 왼쪽 세 막대가 예상보다 낮으면 1주차 엑셀 회차가 성립하지 않고 과정 전체를 다시 짜야 합니다. <b>수강생이 강사보다 엑셀을 잘하는 상황은 사고가 아니라 이 설계의 전제입니다.</b></figcaption>
+      </figure>
+
+      <div class="legend">
+        <span style="font-weight:700;color:var(--ink)">이 문서의 근거 표시</span>
+        <span class="item"><span class="badge meas">실측</span> 공개된 운영 자료에서 확인한 사실</span>
+        <span class="item"><span class="badge est">추정</span> 대상층 특성에 근거한 설계자 판단 — 검증된 수치가 아님</span>
       </div>
 
       <div class="callout">
@@ -321,9 +385,9 @@ footer a{color:var(--ink-soft)}
                 <text class="svg-num" x="363" y="53">18시간 · 6주</text>
               </g>
               <g>
-                <text class="svg-label-b" x="182" y="89" text-anchor="end" fill="var(--ochre)">본 과정 (제안)</text>
+                <text class="svg-label-b" x="182" y="89" text-anchor="end" style="fill:var(--ochre)">본 과정 (제안)</text>
                 <rect x="190" y="76" width="220" height="18" fill="var(--ochre)" rx="1"/>
-                <text class="svg-num" x="418" y="89" fill="var(--ochre)">24시간 · 12주</text>
+                <text class="svg-num" x="418" y="89" style="fill:var(--ochre)">24시간 · 12주</text>
               </g>
               <g>
                 <text class="svg-label" x="182" y="125" text-anchor="end">민간 국비 심화</text>
@@ -333,7 +397,63 @@ footer a{color:var(--ink-soft)}
             </g>
           </svg>
         </div>
-        <figcaption><b>해석.</b> 본 과정은 총 시간(24h)은 공공과정의 1.3~2배지만 <b>회당 2시간으로 쪼개 12주에 분산</b>했습니다. 국내 공공과정이 3시간×4회에 몰아넣는 것과 반대 방향입니다. 이 대상층은 한 번에 오래 앉아 있는 것보다 <b>일주일 간격으로 자기 데이터를 챙겨 오는 리듬</b>에 더 잘 반응하기 때문이며, 대신 12주라는 긴 호흡이 이탈 위험을 키우므로 03장의 이탈 방지 장치가 필수 전제가 됩니다.</figcaption>
+        <figcaption><span class="badge meas">실측</span><b>해석.</b> 본 과정은 총 시간(24h)은 공공과정의 1.3~2배지만 <b>회당 2시간으로 쪼개 12주에 분산</b>했습니다. 국내 공공과정이 3시간×4회에 몰아넣는 것과 반대 방향입니다. 이 대상층은 한 번에 오래 앉아 있는 것보다 <b>일주일 간격으로 자기 데이터를 챙겨 오는 리듬</b>에 더 잘 반응하기 때문이며, 대신 12주라는 긴 호흡이 이탈 위험을 키우므로 03장의 이탈 방지 장치가 필수 전제가 됩니다.</figcaption>
+      </figure>
+
+
+      <figure>
+        <div class="figbox">
+          <svg viewBox="0 0 720 300" role="img" aria-label="국내 3단계 난이도와 본 과정 4단계의 대응 관계도. 국내 중급인 엑셀을 본 과정은 1주차로 앞당기고, 국내 고급인 데이터 분석은 본 과정 3단계에 대응하며, 본 과정 4단계에 대응하는 국내 과정은 없음.">
+            <text class="svg-title" x="0" y="14">국내 난이도 체계와의 대응</text>
+            <text class="svg-label" x="0" y="32">서울시50플러스재단 3단계 분류를 기준으로 본 과정 4단계를 겹쳐 본 것</text>
+            <g transform="translate(600,2)"><rect x="0" y="0" width="120" height="19" rx="9.5" fill="none" stroke="var(--celadon)" stroke-width="1"/>
+              <text x="60" y="13.5" text-anchor="middle" class="svg-num" font-weight="700" style="fill:var(--celadon)">실측 자료 기반</text></g>
+
+            <text class="svg-label-b" x="10" y="52" style="fill:var(--ink-mute)">국내 공공과정</text>
+            <text class="svg-label-b" x="710" y="52" text-anchor="end" style="fill:var(--ochre)">본 과정</text>
+
+            <g>
+              <rect x="10" y="62" width="180" height="48" rx="3" fill="var(--indigo)" opacity=".10"/>
+              <text class="svg-label-b" x="24" y="82">기초</text>
+              <text class="svg-label" x="24" y="99" style="fill:var(--ink-soft)">AI 대화 · 이미지 · 영상</text>
+              <rect x="10" y="124" width="180" height="48" rx="3" fill="var(--indigo)" opacity=".17"/>
+              <text class="svg-label-b" x="24" y="144">중급</text>
+              <text class="svg-label" x="24" y="161" style="fill:var(--ink-soft)">블로그 · 엑셀 · 포스터</text>
+              <rect x="10" y="186" width="180" height="48" rx="3" fill="var(--indigo)" opacity=".24"/>
+              <text class="svg-label-b" x="24" y="206">고급</text>
+              <text class="svg-label" x="24" y="223" style="fill:var(--ink-soft)">데이터 분석 · 자동화</text>
+            </g>
+
+            <g fill="none" stroke-width="1.8">
+              <path d="M190,86 C300,86 330,80 470,80" stroke="var(--indigo-soft)"/>
+              <path d="M190,148 C300,148 330,142 470,142" stroke="var(--indigo-soft)"/>
+              <path d="M190,210 C300,210 330,204 470,204" stroke="var(--indigo-soft)"/>
+              <path d="M190,140 C280,140 300,86 470,86" stroke="var(--ochre)" stroke-width="2.4"/>
+              <path d="M300,266 L470,266" stroke="var(--ink-mute)" stroke-dasharray="5 4"/>
+            </g>
+            <g>
+              <rect x="252" y="100" width="86" height="18" rx="9" fill="var(--ochre)"/>
+              <text x="295" y="113" text-anchor="middle" class="svg-num" font-weight="700" style="fill:var(--on-accent)">1주차로 앞당김</text>
+            </g>
+            <text class="svg-label" x="296" y="262" text-anchor="middle" style="fill:var(--ink-mute)">국내 대응 과정 없음</text>
+
+            <g>
+              <rect x="470" y="62" width="240" height="42" rx="3" fill="var(--indigo)" opacity=".12" stroke="var(--indigo-soft)" stroke-width="1"/>
+              <text class="svg-label-b" x="486" y="80">1단계 · 1–3주</text>
+              <text class="svg-label" x="486" y="96" style="fill:var(--ink-soft)">엑셀 실무 · 긴 문서 · 이미지 · 안전</text>
+              <rect x="470" y="118" width="240" height="42" rx="3" fill="var(--indigo)" opacity=".17" stroke="var(--indigo-soft)" stroke-width="1"/>
+              <text class="svg-label-b" x="486" y="136">2단계 · 4–6주</text>
+              <text class="svg-label" x="486" y="152" style="fill:var(--ink-soft)">말로 앱 만들기 · 에러 대응</text>
+              <rect x="470" y="174" width="240" height="42" rx="3" fill="var(--indigo)" opacity=".22" stroke="var(--indigo-soft)" stroke-width="1"/>
+              <text class="svg-label-b" x="486" y="192">3단계 · 7–9주</text>
+              <text class="svg-label" x="486" y="208" style="fill:var(--ink-soft)">내 데이터 · 대시보드</text>
+              <rect x="470" y="230" width="240" height="42" rx="3" fill="var(--ochre)" opacity=".14" stroke="var(--ochre)" stroke-width="1.5"/>
+              <text class="svg-label-b" x="486" y="248" style="fill:var(--ochre)">4단계 · 10–12주</text>
+              <text class="svg-label" x="486" y="264" style="fill:var(--ink-soft)">트랙별 개인 프로젝트 · 발표회</text>
+            </g>
+          </svg>
+        </div>
+        <figcaption><span class="badge meas">실측</span><b>두 가지가 보입니다.</b> 첫째, 국내가 <b>중급</b>으로 분류한 엑셀을 본 과정은 <b>1주차</b>에 둡니다 — 사무직 경력자에게는 이것이 가장 쉬운 관문이자 신뢰를 얻는 회차이기 때문입니다. 둘째, <b>4단계에 대응하는 국내 과정이 없습니다.</b> 국내는 트랙별로 과정 자체를 분리 개설하는 방식이라, 한 과정 안에서 분기하는 본 설계는 참고할 선례가 없는 구간입니다.</figcaption>
       </figure>
 
       <h3>대조 결과 — 본 계획의 방향 검증</h3>
@@ -370,10 +490,18 @@ footer a{color:var(--ink-soft)}
 
     <div class="stack-lg">
       <figure>
-        <div class="figbox">
-          <svg viewBox="0 0 720 300" role="img" aria-label="주차별 이탈 위험도 곡선. 1주차 계정 가입 장벽, 5주차 첫 에러 경험, 7주차 내 데이터 준비 실패, 10주차 트랙 선택 부담에서 위험이 높아짐.">
+        <div class="figbox est-box">
+          <p class="est-flag">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--crimson)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 L22 20 H2 Z"/><line x1="12" y1="10" x2="12" y2="14"/><circle cx="12" cy="17" r="1" fill="var(--crimson)" stroke="none"/></svg>
+            <span><b>이 곡선은 추정입니다. 실측 데이터가 아닙니다.</b> 조사한 국내 7개 기관 중 <b>중도이탈률을 공개하는 곳은 한 곳도 없었습니다.</b> 아래 곡선은 이 대상층의 특성과 각 회차의 난이도에서 역산한 설계자 판단이며, 세로축에는 눈금이 없습니다 — 봉우리의 <b>순서와 상대적 크기만</b> 참고하시고 절대 수치로 인용하지 마십시오. 실제 운영 시 회차별 출석을 기록해 이 곡선을 여러분의 실측치로 교체하는 것이 가장 좋습니다.</span>
+          </p>
+          <svg viewBox="0 0 720 300" role="img" aria-label="주차별 이탈 위험도 추정 곡선. 1주차 계정 가입 장벽, 5주차 첫 에러 경험, 7주차 내 데이터 준비 실패, 10주차 트랙 선택 부담에서 위험이 높아짐.">
             <text class="svg-title" x="0" y="14">주차별 이탈 위험도와 개입 지점</text>
             <text class="svg-label" x="0" y="32">위험이 솟는 네 지점은 모두 예측 가능하며, 모두 커리큘럼으로 방어할 수 있습니다</text>
+            <g transform="translate(586,2)">
+              <rect x="0" y="0" width="134" height="19" rx="9.5" fill="none" stroke="var(--crimson)" stroke-width="1"/>
+              <text x="67" y="13.5" text-anchor="middle" class="svg-num" font-weight="700" style="fill:var(--crimson)">추정 · 실측 데이터 아님</text>
+            </g>
 
             <!-- y grid -->
             <g stroke="var(--line)" stroke-width="1" stroke-dasharray="2 4">
@@ -381,8 +509,9 @@ footer a{color:var(--ink-soft)}
               <line x1="60" y1="115" x2="690" y2="115"/>
             </g>
             <line x1="60" y1="190" x2="690" y2="190" stroke="var(--line)" stroke-width="1.5"/>
-            <text class="svg-num" x="52" y="44" text-anchor="end">높음</text>
-            <text class="svg-num" x="52" y="194" text-anchor="end">낮음</text>
+            <text class="svg-num" x="52" y="44" text-anchor="end">위험 높음</text>
+            <text class="svg-num" x="52" y="194" text-anchor="end">위험 낮음</text>
+            <text class="svg-num" x="52" y="120" text-anchor="end" font-style="italic">눈금 없음</text>
 
             <!-- area -->
             <path d="M60,78 L117,130 L175,145 L232,138 L289,63 L346,138 L404,85 L461,123 L518,145 L576,115 L633,153 L690,175 L690,190 L60,190 Z"
@@ -424,7 +553,7 @@ footer a{color:var(--ink-soft)}
             </g>
 
             <!-- interventions -->
-            <text class="svg-label-b" x="0" y="266" fill="var(--celadon)">방어 장치</text>
+            <text class="svg-label-b" x="0" y="266" style="fill:var(--celadon)">방어 장치</text>
             <g class="svg-label" fill="var(--ink-soft)">
               <text x="66" y="266">사전 OT에서 계정 개설 완료</text>
               <text x="290" y="266" text-anchor="middle">5주차 = 에러 대응 전용 회차</text>
@@ -433,7 +562,43 @@ footer a{color:var(--ink-soft)}
             </g>
           </svg>
         </div>
-        <figcaption><b>읽는 법.</b> 곡선이 높을수록 그 주에 수강생이 그만둘 확률이 큽니다. 네 개의 봉우리는 각각 원인이 다르고 대응도 다릅니다. 특히 <b>5주차 봉우리는 커리큘럼으로만 막을 수 있습니다</b> — 에러를 만나기 전에 에러 다루는 법을 먼저 가르치는 것이 유일한 해법입니다.</figcaption>
+        <figcaption><span class="badge est">추정</span><b>읽는 법.</b> 곡선이 높을수록 그 주에 수강생이 그만둘 확률이 크다는 <b>가설</b>입니다. 네 개의 봉우리는 각각 원인이 다르고 대응도 다릅니다. 특히 <b>5주차 봉우리는 커리큘럼으로만 막을 수 있습니다</b> — 에러를 만나기 전에 에러 다루는 법을 먼저 가르치는 것이 유일한 해법입니다.</figcaption>
+      </figure>
+
+
+      <figure>
+        <div class="figbox">
+          <svg viewBox="0 0 720 132" role="img" aria-label="설계 원칙 다섯 가지 요약: 설치 금지, 말로 고친다, 내 데이터로, 에러도 교과, 동년배 조교.">
+            <g fill="none" stroke="var(--indigo)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="58" y="32" width="28" height="22" rx="2.5"/><line x1="58" y1="39" x2="86" y2="39"/>
+        <line x1="54" y1="58" x2="90" y2="28" stroke="var(--crimson)" stroke-width="2.2"/></g>
+            <text x="72" y="83" text-anchor="middle" font-family="var(--font-display)" font-size="13" font-weight="700" fill="var(--ochre)">一</text>
+            <text class="svg-label-b" x="72" y="102" text-anchor="middle">설치 금지</text>
+            <text class="svg-num" x="72" y="118" text-anchor="middle" style="fill:var(--ink-mute)">전 과정 브라우저</text>
+            <g fill="none" stroke="var(--indigo)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M202,32 h28 a3,3 0 0 1 3,3 v13 a3,3 0 0 1 -3,3 h-16 l-7,6 v-6 h-5 a3,3 0 0 1 -3,-3 v-13 a3,3 0 0 1 3,-3 z"/>
+        <polyline points="212,38 207,42.5 212,47"/><polyline points="220,38 225,42.5 220,47"/></g>
+            <text x="216" y="83" text-anchor="middle" font-family="var(--font-display)" font-size="13" font-weight="700" fill="var(--ochre)">二</text>
+            <text class="svg-label-b" x="216" y="102" text-anchor="middle">말로 고친다</text>
+            <text class="svg-num" x="216" y="118" text-anchor="middle" style="fill:var(--ink-mute)">타이핑 없음</text>
+            <g fill="none" stroke="var(--indigo)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="349" y="31" width="22" height="26" rx="2"/><line x1="354" y1="39" x2="366" y2="39"/>
+        <line x1="354" y1="44" x2="366" y2="44"/><line x1="354" y1="49" x2="362" y2="49"/>
+        <circle cx="371" cy="31" r="4.5" fill="var(--ochre)" stroke="none"/></g>
+            <text x="360" y="83" text-anchor="middle" font-family="var(--font-display)" font-size="13" font-weight="700" fill="var(--ochre)">三</text>
+            <text class="svg-label-b" x="360" y="102" text-anchor="middle">내 데이터로</text>
+            <text class="svg-num" x="360" y="118" text-anchor="middle" style="fill:var(--ink-mute)">예제 데이터 금지</text>
+            <g fill="none" stroke="var(--indigo)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M504,31 L517,54 L491,54 Z"/><line x1="504" y1="39" x2="504" y2="45"/>
+        <circle cx="504" cy="49" r="1.3" fill="var(--indigo)" stroke="none"/>
+        <polyline points="509,50 513,54 520,44" stroke="var(--celadon)" stroke-width="2.3"/></g>
+            <text x="504" y="83" text-anchor="middle" font-family="var(--font-display)" font-size="13" font-weight="700" fill="var(--ochre)">四</text>
+            <text class="svg-label-b" x="504" y="102" text-anchor="middle">에러도 교과</text>
+            <text class="svg-num" x="504" y="118" text-anchor="middle" style="fill:var(--ink-mute)">5주차 전용 배정</text>
+            <g fill="none" stroke="var(--indigo)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="640" cy="37" r="4.5"/><path d="M633,54 c0,-6 3.5,-8.5 7,-8.5 s7,2.5 7,8.5"/>
+        <circle cx="656" cy="37" r="4.5"/><path d="M649,54 c0,-6 3.5,-8.5 7,-8.5 s7,2.5 7,8.5"/></g>
+            <text x="648" y="83" text-anchor="middle" font-family="var(--font-display)" font-size="13" font-weight="700" fill="var(--ochre)">五</text>
+            <text class="svg-label-b" x="648" y="102" text-anchor="middle">동년배 조교</text>
+            <text class="svg-num" x="648" y="118" text-anchor="middle" style="fill:var(--ink-mute)">2인 1조 고정</text>
+          </svg>
+        </div>
+        <figcaption>다섯 원칙은 앞의 네 봉우리에 대한 답입니다. <b>一·五</b>는 1주차 봉우리를, <b>四</b>는 5주차 봉우리를, <b>三</b>은 7주차 봉우리를 겨냥합니다.</figcaption>
       </figure>
 
       <div class="stack">
@@ -519,10 +684,55 @@ footer a{color:var(--ink-soft)}
               <text x="376" y="276">"내 데이터가 그림이 됐다"</text>
               <text x="536" y="276">"내 이름의 결과물"</text>
             </g>
-            <text class="svg-num" x="16" y="78" fill="var(--ink-mute)" transform="rotate(-90 16 170)" text-anchor="middle">성취 수준</text>
+            <text class="svg-num" x="16" y="78" transform="rotate(-90 16 170)" text-anchor="middle" style="fill:var(--ink-mute)">성취 수준</text>
           </svg>
         </div>
         <figcaption><b>구조의 의미.</b> 4주차 앱은 1주차에 정리한 엑셀 데이터를 씁니다. 8주차 대시보드는 6주차 앱이 쌓은 기록을 씁니다. 12주차 프로젝트는 그 전부를 씁니다. <b>결석하면 다음 주 재료가 없어지는 구조</b>라서, 이 설계 자체가 출석 유인이 됩니다.</figcaption>
+      </figure>
+
+
+      <figure>
+        <div class="figbox">
+          <svg viewBox="0 0 720 232" role="img" aria-label="결과물 재료 흐름도. 데이터 계열과 앱 계열 두 갈래가 각각 누적되어 12주차 최종 결과물로 합류.">
+            <defs><marker id="arwFlow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+              <path d="M0,0 L10,5 L0,10 z" fill="var(--indigo-soft)"/></marker></defs>
+            <text class="svg-title" x="0" y="14">결과물이 다음 주의 재료가 된다</text>
+            <text class="svg-label" x="0" y="32">결석하면 다음 주에 쓸 재료가 없어집니다. 이 구조 자체가 출석 유인입니다.</text>
+
+            <text class="svg-num" x="0" y="66" font-weight="700" style="fill:var(--celadon)">데이터 계열</text>
+            <text class="svg-num" x="0" y="152" font-weight="700" style="fill:var(--celadon)">앱 계열</text>
+
+              <rect x="20" y="52" width="110" height="42" rx="3" fill="var(--indigo)" opacity=".10" stroke="var(--indigo)" stroke-width="1"/>
+              <text class="svg-num" x="34" y="69" font-weight="700" style="fill:var(--indigo)">1주차</text>
+              <text class="svg-label-b" x="34" y="85">엑셀 정리 데이터</text>
+              <rect x="175" y="52" width="110" height="42" rx="3" fill="var(--indigo)" opacity=".10" stroke="var(--indigo)" stroke-width="1"/>
+              <text class="svg-num" x="189" y="69" font-weight="700" style="fill:var(--indigo)">7주차</text>
+              <text class="svg-label-b" x="189" y="85">내 데이터셋</text>
+              <rect x="330" y="52" width="110" height="42" rx="3" fill="var(--indigo)" opacity=".10" stroke="var(--indigo)" stroke-width="1"/>
+              <text class="svg-num" x="344" y="69" font-weight="700" style="fill:var(--indigo)">8·9주차</text>
+              <text class="svg-label-b" x="344" y="85">대시보드</text>
+              <rect x="20" y="138" width="110" height="42" rx="3" fill="var(--indigo)" opacity=".10" stroke="var(--indigo)" stroke-width="1"/>
+              <text class="svg-num" x="34" y="155" font-weight="700" style="fill:var(--indigo)">4주차</text>
+              <text class="svg-label-b" x="34" y="171">첫 앱</text>
+              <rect x="175" y="138" width="110" height="42" rx="3" fill="var(--indigo)" opacity=".10" stroke="var(--indigo)" stroke-width="1"/>
+              <text class="svg-num" x="189" y="155" font-weight="700" style="fill:var(--indigo)">5주차</text>
+              <text class="svg-label-b" x="189" y="171">개선 앱</text>
+              <rect x="330" y="138" width="110" height="42" rx="3" fill="var(--indigo)" opacity=".10" stroke="var(--indigo)" stroke-width="1"/>
+              <text class="svg-num" x="344" y="155" font-weight="700" style="fill:var(--indigo)">6주차</text>
+              <text class="svg-label-b" x="344" y="171">시뮬레이터</text>
+              <rect x="545" y="88" width="110" height="42" rx="3" fill="var(--ochre)" opacity=".14" stroke="var(--ochre)" stroke-width="1"/>
+              <text class="svg-num" x="559" y="105" font-weight="700" style="fill:var(--ochre)">12주차</text>
+              <text class="svg-label-b" x="559" y="121">최종 결과물</text>
+            <g fill="none" stroke="var(--indigo-soft)" stroke-width="1.8" marker-end="url(#arwFlow)">
+              <path d="M130,73 L167,73"/><path d="M285,73 L322,73"/>
+              <path d="M130,159 L167,159"/><path d="M285,159 L322,159"/>
+              <path d="M440,73 C495,73 490,100 537,100"/>
+              <path d="M440,159 C495,159 490,132 537,132"/>
+            </g>
+            <text class="svg-num" x="360" y="212" text-anchor="middle" style="fill:var(--ink-mute)">두 갈래가 합류하는 지점이 트랙 프로젝트입니다</text>
+          </svg>
+        </div>
+        <figcaption>4주차 앱은 1주차에 정리한 엑셀 데이터를 씁니다. 8주차 대시보드는 7주차 데이터셋을 씁니다. <b>12주차 프로젝트는 그 전부를 씁니다.</b> 커리큘럼 순서를 바꾸면 이 사슬이 끊어집니다.</figcaption>
       </figure>
 
       <div class="tablewrap">
@@ -589,7 +799,7 @@ footer a{color:var(--ink-soft)}
 
             <text class="svg-label-b" x="60" y="128">1–9주 공통 과정</text>
             <text class="svg-label" x="60" y="163">AI 실무 · 앱 제작 · 대시보드</text>
-            <text class="svg-num" x="250" y="118" text-anchor="middle" fill="var(--ink-mute)">9주차 상담</text>
+            <text class="svg-num" x="250" y="118" text-anchor="middle" style="fill:var(--ink-mute)">9주차 상담</text>
 
             <g class="svg-label-b">
               <text x="436" y="46">제2커리어 트랙</text>
@@ -608,8 +818,56 @@ footer a{color:var(--ink-soft)}
         <figcaption><b>운영 유의.</b> 트랙은 10주차에 고르는 것이 아니라 <b>9주차 상담에서 확정</b>합니다. 선택 자체가 부담이 되어 이탈로 이어지는 것을 막기 위해서입니다. 트랙별 최소 인원은 3명 — 미달 시 인접 트랙과 병합하십시오.</figcaption>
       </figure>
 
+
       <h3>주제 은행</h3>
       <p class="lead prose">아래는 이 대상층에서 실제로 반응이 큰 주제를 분야별로 모은 것입니다. 강사는 매 회차 실습 주제를 여기서 골라 쓰고, 수강생은 10주차 프로젝트 주제를 여기서 고릅니다.</p>
+
+      <figure>
+        <div class="figbox">
+          <svg viewBox="0 0 720 336" role="img" aria-label="주제 분야와 트랙의 대응 매트릭스. 각 분야가 어느 트랙의 주력 주제인지 표시.">
+            <text class="svg-title" x="0" y="14">어느 분야가 어느 트랙으로 가는가</text>
+            <text class="svg-label" x="0" y="32">9주차 트랙 상담에서 이 표를 그대로 쓰십시오</text>
+            <rect x="213" y="58" width="104" height="216" rx="3" fill="var(--indigo)" opacity=".07"/>
+            <text class="svg-label-b" x="265" y="48" text-anchor="middle">제2커리어</text>
+            <rect x="328" y="58" width="104" height="216" rx="3" fill="var(--indigo)" opacity=".04"/>
+            <text class="svg-label-b" x="380" y="48" text-anchor="middle">자산관리</text>
+            <rect x="443" y="58" width="104" height="216" rx="3" fill="var(--indigo)" opacity=".07"/>
+            <text class="svg-label-b" x="495" y="48" text-anchor="middle">기록·유산</text>
+            <rect x="558" y="58" width="104" height="216" rx="3" fill="var(--indigo)" opacity=".04"/>
+            <text class="svg-label-b" x="610" y="48" text-anchor="middle">모임·창업</text>
+            <text class="svg-label" x="196" y="82" text-anchor="end">돈</text>
+            <circle cx="380" cy="78" r="6.5" fill="var(--ochre)"/>
+            <text class="svg-label" x="196" y="109" text-anchor="end">건강</text>
+            <circle cx="380" cy="105" r="5.5" fill="none" stroke="var(--indigo-soft)" stroke-width="1.8"/>
+            <circle cx="495" cy="105" r="5.5" fill="none" stroke="var(--indigo-soft)" stroke-width="1.8"/>
+            <text class="svg-label" x="196" y="136" text-anchor="end">경력 자산화</text>
+            <circle cx="265" cy="132" r="6.5" fill="var(--ochre)"/>
+            <text class="svg-label" x="196" y="163" text-anchor="end">기억과 유산</text>
+            <circle cx="495" cy="159" r="6.5" fill="var(--ochre)"/>
+            <text class="svg-label" x="196" y="190" text-anchor="end">사회활동</text>
+            <circle cx="610" cy="186" r="6.5" fill="var(--ochre)"/>
+            <circle cx="495" cy="186" r="5.5" fill="none" stroke="var(--indigo-soft)" stroke-width="1.8"/>
+            <text class="svg-label" x="196" y="217" text-anchor="end">소상공인·부업</text>
+            <circle cx="610" cy="213" r="6.5" fill="var(--ochre)"/>
+            <circle cx="265" cy="213" r="5.5" fill="none" stroke="var(--indigo-soft)" stroke-width="1.8"/>
+            <text class="svg-label" x="196" y="244" text-anchor="end">사무 스킬</text>
+            <circle cx="265" cy="240" r="6.5" fill="var(--ochre)"/>
+            <circle cx="610" cy="240" r="5.5" fill="none" stroke="var(--indigo-soft)" stroke-width="1.8"/>
+            <text class="svg-label" x="196" y="271" text-anchor="end">취미·자기실현</text>
+            <circle cx="495" cy="267" r="5.5" fill="none" stroke="var(--indigo-soft)" stroke-width="1.8"/>
+            <rect x="213" y="288" width="449" height="26" rx="3" fill="var(--crimson)" opacity=".10" stroke="var(--crimson)" stroke-width="1" stroke-dasharray="4 3"/>
+            <text class="svg-label" x="196" y="305" text-anchor="end" style="fill:var(--crimson)">디지털 안전</text>
+            <text class="svg-label-b" x="437" y="305" text-anchor="middle" style="fill:var(--crimson)">전 트랙 공통 · 3주차 필수 · 트랙과 무관하게 전원 이수</text>
+
+            <g transform="translate(196,330)">
+              <circle cx="8" cy="-4" r="6.5" fill="var(--ochre)"/><text class="svg-num" x="20" y="0" style="fill:var(--ink-soft)">주력 주제</text>
+              <circle cx="98" cy="-4" r="5.5" fill="none" stroke="var(--indigo-soft)" stroke-width="1.8"/><text class="svg-num" x="110" y="0" style="fill:var(--ink-soft)">함께 쓰기 좋은 주제</text>
+            </g>
+          </svg>
+        </div>
+        <figcaption><b>자산관리 트랙에 쏠릴 것을 예상하십시오.</b> 「돈」 분야가 이 대상층에서 가장 강한 동기이고, 자산관리 트랙에 정면으로 대응하는 유일한 분야입니다. 반대로 「사무 스킬」과 「소상공인」은 두 트랙에 걸쳐 있어 상담 시 방향을 잡아 주어야 합니다.</figcaption>
+      </figure>
+
 
       <div class="grid2">
         <div class="card">
@@ -741,8 +999,8 @@ footer a{color:var(--ink-soft)}
               <rect x="493" y="0" width="107" height="34" fill="var(--celadon)" opacity=".3" rx="2"/>
               <rect x="600" y="0" width="80" height="34" fill="var(--indigo)" opacity=".35" rx="2"/>
 
-              <text class="svg-label-b" x="333" y="22" text-anchor="middle" fill="var(--on-accent)">직접 실습 60분</text>
-              <text class="svg-label" x="546" y="22" text-anchor="middle" fill="var(--ink)">해결 20분</text>
+              <text class="svg-label-b" x="333" y="22" text-anchor="middle" style="fill:var(--on-accent)">직접 실습 60분</text>
+              <text class="svg-label" x="546" y="22" text-anchor="middle" style="fill:var(--ink)">해결 20분</text>
 
               <g stroke="var(--line)" stroke-width="1">
                 <line x1="66" y1="38" x2="66" y2="58"/><line x1="133" y1="38" x2="133" y2="72"/>
@@ -819,6 +1077,54 @@ footer a{color:var(--ink-soft)}
         <p class="note" style="margin-top:10px;font-size:.87rem;color:var(--ink-mute)">국내 공공과정은 대체로 ChatGPT 또는 Gemini 단일 도구로 운영합니다. 민간 국비과정만 다중 스택(ChatGPT·Claude·Gemini·CLOVA X)을 씁니다. <b>본 과정은 공공 방식을 따라 주력 1개를 정하고 나머지는 소개만 하십시오.</b></p>
       </div>
 
+
+      <figure>
+        <div class="figbox">
+          <svg viewBox="0 0 720 290" role="img" aria-label="주차별 도구 투입 간트 차트. 대화형 AI는 전 기간, 나머지 도구는 해당 단계에만 투입되고 10주차 이후는 트랙별 선택.">
+            <text class="svg-title" x="0" y="14">도구는 언제 등장하는가</text>
+            <text class="svg-label" x="0" y="32">한 번에 새 도구를 둘 이상 꺼내지 않습니다</text>
+            <g stroke="var(--line)" stroke-width="1" stroke-dasharray="2 4">
+              <line x1="313" y1="52" x2="313" y2="240"/><line x1="436" y1="52" x2="436" y2="240"/><line x1="559" y1="52" x2="559" y2="240"/>
+            </g>
+            <text class="svg-num" x="209" y="44" text-anchor="middle" style="fill:var(--ink-mute)">1</text>
+            <text class="svg-num" x="250" y="44" text-anchor="middle" style="fill:var(--ink-mute)">2</text>
+            <text class="svg-num" x="291" y="44" text-anchor="middle" style="fill:var(--ink-mute)">3</text>
+            <text class="svg-num" x="332" y="44" text-anchor="middle" style="fill:var(--ink-mute)">4</text>
+            <text class="svg-num" x="373" y="44" text-anchor="middle" style="fill:var(--ink-mute)">5</text>
+            <text class="svg-num" x="414" y="44" text-anchor="middle" style="fill:var(--ink-mute)">6</text>
+            <text class="svg-num" x="455" y="44" text-anchor="middle" style="fill:var(--ink-mute)">7</text>
+            <text class="svg-num" x="496" y="44" text-anchor="middle" style="fill:var(--ink-mute)">8</text>
+            <text class="svg-num" x="537" y="44" text-anchor="middle" style="fill:var(--ink-mute)">9</text>
+            <text class="svg-num" x="578" y="44" text-anchor="middle" style="fill:var(--ink-mute)">10</text>
+            <text class="svg-num" x="619" y="44" text-anchor="middle" style="fill:var(--ink-mute)">11</text>
+            <text class="svg-num" x="660" y="44" text-anchor="middle" style="fill:var(--ink-mute)">12</text>
+            <text class="svg-label" x="178" y="71" text-anchor="end">대화형 AI (주력 1개)</text>
+            <rect x="190" y="58" width="489" height="18" rx="2" fill="var(--ochre)"/>
+            <text class="svg-label" x="178" y="101" text-anchor="end">이미지 생성</text>
+            <rect x="272" y="88" width="38" height="18" rx="2" fill="var(--ochre)"/>
+            <rect x="559" y="88" width="120" height="18" rx="2" fill="var(--ochre)" opacity=".22" stroke="var(--ochre)" stroke-width="1" stroke-dasharray="3 3"/>
+            <text class="svg-label" x="178" y="131" text-anchor="end">앱 제작 (Artifacts)</text>
+            <rect x="313" y="118" width="120" height="18" rx="2" fill="var(--ochre)"/>
+            <rect x="559" y="118" width="120" height="18" rx="2" fill="var(--ochre)" opacity=".22" stroke="var(--ochre)" stroke-width="1" stroke-dasharray="3 3"/>
+            <text class="svg-label" x="178" y="161" text-anchor="end">스프레드시트</text>
+            <rect x="436" y="148" width="120" height="18" rx="2" fill="var(--ochre)"/>
+            <rect x="559" y="148" width="120" height="18" rx="2" fill="var(--ochre)" opacity=".22" stroke="var(--ochre)" stroke-width="1" stroke-dasharray="3 3"/>
+            <text class="svg-label" x="178" y="191" text-anchor="end">대시보드</text>
+            <rect x="477" y="178" width="79" height="18" rx="2" fill="var(--ochre)"/>
+            <rect x="559" y="178" width="120" height="18" rx="2" fill="var(--ochre)" opacity=".22" stroke="var(--ochre)" stroke-width="1" stroke-dasharray="3 3"/>
+            <text class="svg-label" x="178" y="221" text-anchor="end">문서·슬라이드</text>
+            <rect x="600" y="208" width="79" height="18" rx="2" fill="var(--ochre)"/>
+            <g transform="translate(190,262)">
+              <rect x="0" y="-11" width="26" height="14" rx="2" fill="var(--ochre)"/><text class="svg-num" x="34" y="0" style="fill:var(--ink-soft)">필수 투입</text>
+              <rect x="110" y="-11" width="26" height="14" rx="2" fill="var(--ochre)" opacity=".22" stroke="var(--ochre)" stroke-width="1" stroke-dasharray="3 3"/>
+              <text class="svg-num" x="144" y="0" style="fill:var(--ink-soft)">트랙에 따라 선택</text>
+            </g>
+            <text class="svg-num" x="178" y="44" text-anchor="end" style="fill:var(--ink-mute)">주차</text>
+          </svg>
+        </div>
+        <figcaption>새 도구가 등장하는 주는 <b>1·3·4·7·8·11주차뿐</b>이고, 그중 두 개가 동시에 등장하는 주는 없습니다. 도구 학습 부담을 회차당 하나로 묶은 결과이며, 이 원칙이 깨지면 실습 시간 60분이 지켜지지 않습니다.</figcaption>
+      </figure>
+
       <div>
         <h3 style="margin-bottom:6px">Claude Skills — 강사·운영진용</h3>
         <p class="lead prose" style="margin-bottom:16px">Skills는 <b>수강생에게 가르칠 내용이 아닙니다.</b> 12주 동안 강사와 운영진이 만들어야 할 유인물·평가표·수료증·발표자료를 자동화하는 <b>운영 측 생산성 도구</b>로만 씁니다. 이것을 커리큘럼에 넣으면 난이도가 붕괴합니다.</p>
@@ -885,6 +1191,62 @@ footer a{color:var(--ink-soft)}
           </ul>
         </div>
       </div>
+
+
+      <figure>
+        <div class="figbox est-box">
+          <p class="est-flag">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--crimson)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 L22 20 H2 Z"/><line x1="12" y1="10" x2="12" y2="14"/><circle cx="12" cy="17" r="1" fill="var(--crimson)" stroke="none"/></svg>
+            <span><b>영향도는 추정입니다.</b> 세로축 위치는 사고 사례 통계가 아니라 설계자의 판단입니다. 운영 기관의 상황(공공/민간, 개인정보 정책, 강사 풀)에 따라 순위가 달라지므로, <b>착수 전 운영진이 직접 다시 배치해 보는 용도</b>로 쓰십시오. 가로축(발생 시점)만 커리큘럼 구조에서 도출된 것입니다.</span>
+          </p>
+          <svg viewBox="0 0 720 300" role="img" aria-label="리스크 히트맵. 가로축은 발생 시점, 세로축은 추정 영향도. 개인정보 유출과 AI 환각 오정보가 최우선 관리 구역에 위치.">
+            <text class="svg-title" x="0" y="14">리스크 — 언제, 얼마나 아픈가</text>
+            <g transform="translate(586,2)">
+              <rect x="0" y="0" width="134" height="19" rx="9.5" fill="none" stroke="var(--crimson)" stroke-width="1"/>
+              <text x="67" y="13.5" text-anchor="middle" class="svg-num" font-weight="700" style="fill:var(--crimson)">세로축 추정 · 실측 아님</text>
+            </g>
+
+            <rect x="95" y="52" width="560" height="70" fill="var(--crimson)" opacity=".07" rx="2"/>
+            <text class="svg-num" x="649" y="66" text-anchor="end" font-weight="700" style="fill:var(--crimson)">최우선 관리 구역</text>
+
+            <g stroke="var(--line)" stroke-width="1" stroke-dasharray="2 4">
+              <line x1="233" y1="52" x2="233" y2="250"/><line x1="371" y1="52" x2="371" y2="250"/><line x1="509" y1="52" x2="509" y2="250"/>
+              <line x1="95" y1="157" x2="655" y2="157"/>
+            </g>
+            <line x1="95" y1="250" x2="655" y2="250" stroke="var(--ink-mute)" stroke-width="1"/>
+            <line x1="95" y1="52" x2="95" y2="250" stroke="var(--ink-mute)" stroke-width="1"/>
+
+            <circle cx="95" cy="111" r="6" fill="var(--crimson)"/>
+            <text class="svg-label" x="105" y="115" text-anchor="start" style="fill:var(--ink)">계정 가입 실패</text>
+            <circle cx="187" cy="84" r="6" fill="var(--crimson)"/>
+            <text class="svg-label" x="197" y="80" text-anchor="start" style="fill:var(--ink)">AI 환각 오정보</text>
+            <circle cx="325" cy="102" r="6" fill="var(--crimson)"/>
+            <text class="svg-label" x="335" y="98" text-anchor="start" style="fill:var(--ink)">중도 이탈</text>
+            <circle cx="371" cy="139" r="6" fill="var(--ochre)"/>
+            <text class="svg-label" x="381" y="135" text-anchor="start" style="fill:var(--ink)">유료 한도 소진</text>
+            <circle cx="371" cy="185" r="6" fill="var(--ink-mute)"/>
+            <text class="svg-label" x="381" y="181" text-anchor="start" style="fill:var(--ink)">도구 UI 변경</text>
+            <circle cx="463" cy="74" r="6" fill="var(--crimson)"/>
+            <text class="svg-label" x="473" y="70" text-anchor="start" style="fill:var(--ink)">개인정보 유출</text>
+            <circle cx="532" cy="158" r="6" fill="var(--ochre)"/>
+            <text class="svg-label" x="542" y="154" text-anchor="start" style="fill:var(--ink)">트랙 인원 편중</text>
+            <circle cx="601" cy="120" r="6" fill="var(--crimson)"/>
+            <text class="svg-label" x="591" y="116" text-anchor="end" style="fill:var(--ink)">강사 역량 편차</text>
+
+            <g class="svg-num" fill="var(--ink-mute)">
+              <text x="87" y="60" text-anchor="end">영향 큼</text>
+              <text x="87" y="252" text-anchor="end">영향 작음</text>
+              <text x="95" y="270" text-anchor="middle">개강 전</text>
+              <text x="233" y="270" text-anchor="middle">3주</text>
+              <text x="371" y="270" text-anchor="middle">6주</text>
+              <text x="509" y="270" text-anchor="middle">9주</text>
+              <text x="647" y="270" text-anchor="middle">12주</text>
+              <text x="360" y="290" text-anchor="middle" font-style="italic">발생 시점</text>
+            </g>
+          </svg>
+        </div>
+        <figcaption><span class="badge est">추정</span><b>두 개만 기억하면 됩니다.</b> <b>개인정보 유출</b>과 <b>AI 환각 오정보</b>가 유일하게 되돌릴 수 없는 리스크입니다. 나머지 여섯은 불편하지만 복구 가능합니다. 예산과 주의력이 부족하다면 이 둘에만 쓰십시오 — 7주차 마스킹 규칙과 2주차 검증 교육이 각각의 방어선입니다.</figcaption>
+      </figure>
 
       <h3>리스크 등록부</h3>
       <div class="tablewrap">
